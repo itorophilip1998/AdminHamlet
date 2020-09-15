@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+    <nav class="navbar navbar-vertical shaow fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
         <div class="container-fluid">
 
             <!--Toggler-->
@@ -7,10 +7,13 @@
                 <span class="navbar-toggler-icon"></span>
             </navbar-toggle-button>
             <router-link class="navbar-brand" to="/">
-                <img :src="logo" class="navbar-brand-img" alt="...">
-            </router-link>
-
+                <!-- <img :src="logo" class="navbar-brand-img" alt="..."> -->
+         <h2>Hamlet <span class="text-primary">Admin</span>
+         </h2>
+            </router-link> 
             <slot name="mobile-right">
+         <hr class="p-0 m-0">
+
                 <ul class="nav align-items-center d-md-none">
                     <base-dropdown class="nav-item" position="right">
                         <a slot="title" class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown"
@@ -66,7 +69,7 @@
                     <div class="row">
                         <div class="col-6 collapse-brand">
                             <router-link to="/">
-                                <img :src="logo">
+                                 <h2>Hamlet <span class="text-primary">Admin</span></h2>
                             </router-link>
                         </div>
                         <div class="col-6 collapse-close">
@@ -80,29 +83,15 @@
                     </slot>
                 </ul>
                 <!--Divider-->
-                <hr class="my-3">
-                <!--Heading-->
-                <h6 class="navbar-heading text-muted">Documentation</h6>
+                <hr class="my-3"> 
                 <!--Navigation-->
                 <ul class="navbar-nav mb-md-3">
                     <li class="nav-item">
-                        <a class="nav-link"
-                           href="https://demos.creative-tim.com/vue-argon-dashboard/documentation">
-                            <i class="ni ni-spaceship"></i> Getting started
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="https://demos.creative-tim.com/vue-argon-dashboard/documentation/foundation/colors.html">
-                            <i class="ni ni-palette"></i> Foundation
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="https://demos.creative-tim.com/vue-argon-dashboard/documentation/components/alerts.html">
-                            <i class="ni ni-ui-04"></i> Components
-                        </a>
-                    </li>
+                        <router-link class="nav-link"
+                           to="/login">
+                            <i class="ni ni-spaceship"></i>Logout
+                        </router-link>
+                    </li> 
                 </ul>
             </div>
             </div>
