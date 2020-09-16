@@ -52,8 +52,14 @@
     },
     methods: {
         login()
-        {
-            
+        {  
+           this.$http.post(`${this.$baseApi}/api/auth/login`, this.model).then(function (response) {
+               console.log(response)
+           })
+           .catch(function (error) {
+               console.log(error)
+                 
+           })
         }
     },
   }
