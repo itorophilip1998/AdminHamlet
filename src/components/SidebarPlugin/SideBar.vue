@@ -55,10 +55,10 @@
                             <span>Support</span>
                         </router-link>
                         <div class="dropdown-divider"></div>
-                        <a href="#!" class="dropdown-item">
+                        <button  @click="logout()" class="dropdown-item btn">
                             <i class="ni ni-user-run"></i>
                             <span>Logout</span>
-                        </a>
+                        </button>
                     </base-dropdown>
                 </ul>
             </slot>
@@ -87,10 +87,9 @@
                 <!--Navigation-->
                 <ul class="navbar-nav mb-md-3">
                     <li class="nav-item">
-                        <router-link class="nav-link"
-                           to="/login">
+                        <button @click="logout()" class="nav-link btn w-100 m-auto">
                             <i class="ni ni-spaceship"></i>Logout
-                        </router-link>
+                        </button>
                     </li> 
                 </ul>
             </div>
@@ -123,6 +122,11 @@
       };
     },
     methods: {
+      logout()
+      {
+        localStorage.removeItem(this.$token)
+        this.$router.push("/login") 
+      },
       closeSidebar() {
         this.$sidebar.displaySidebar(false)
       },

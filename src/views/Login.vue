@@ -1,7 +1,7 @@
 <template>
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7">
-                <div class="card bg-secondary shadow border-0">
+                <div class="card bg-secondary shadow border ">
                  
                     <div class="card-body px-lg-5 py-lg-5">
                         <div class="text-center text-muted mb-4">
@@ -40,7 +40,8 @@
         </div>
 </template>
 <script>
-  export default {
+import Swal from 'sweetalert2'
+  export default { 
     name: 'login',
     data() {
       return {
@@ -53,12 +54,20 @@
     methods: {
         login()
         {  
-           this.$http.post(`${this.$baseApi}/api/auth/login`, this.model).then(function (response) {
-               console.log(response)
-           })
-           .catch(function (error) {
-               console.log(error)
-                 
+           this.$http.post(`${this.$baseApi}/api/auth/login`, this.model).then((response)=> {
+            //    manipulate secured token
+               localStorage.setItem(this.$token, response.data.token);  
+                 Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                text: 'Login Successfully!',
+                showConfirmButton: false,
+                timer: 1500,
+                width: 400, 
+                }) 
+                this.$router.push("/dashboard")
+           }).catch((error)=>{
+                  console.log(error)
            })
         }
     },
