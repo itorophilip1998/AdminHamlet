@@ -1,6 +1,6 @@
 <template>
     <div>
-        <base-header type="gradient-primary" class="pb-4 pt-5 pt-md-8 "> 
+        <base-header type="gradient-primary" class="pb-5 pt-5 pt-md-8 "> 
             <!-- Card stats -->
             <div class="row">
                 <div class="col-xl-4 col-lg-6">
@@ -46,7 +46,7 @@
                 </div>
             </div> 
           </base-header>
-        <base-header type="gradient-primary" class="  pb-4  pt-md-1"> 
+        <base-header type="gradient-primary" class="  pb-5  pt-md-1"> 
         
             <!-- Card stats -->
             <div class="row">

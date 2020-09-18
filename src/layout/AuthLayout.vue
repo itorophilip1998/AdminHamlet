@@ -1,12 +1,12 @@
 <template>
-    <div class="main-content  bg-gradient-white ">
+    <div class="main-content  bg-gradient-primary  ">
         <!-- Navbar -->
         <base-nav class="navbar-top navbar-horizontal navbar-dark"
                   containerClasses="px-4 container"
                   expand>
             <router-link slot="brand" class="navbar-brand" to="/">
                 <!-- <img src="img/brand/white.png"/>   -->
-         <h2 >Hamlet <span class="text-primary">Admin</span></h2>
+         <h2 class="text-white">Hamlet <span style="color:silver">Admin</span></h2>
               
             </router-link>
 
@@ -34,20 +34,20 @@
                 <!-- Navbar items -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <router-link class="nav-link nav-link-icon text-primary" to="/">
+                        <router-link class="nav-link nav-link-icon  " s to="/">
                             <i class="ni ni-planet"></i>
                             <span class="nav-link-inner--text">Dashboard</span>
                         </router-link>
                     </li>
                    
                     <li class="nav-item">
-                        <router-link class="nav-link nav-link-icon text-primary" to="/login">
+                        <router-link class="nav-link nav-link-icon " to="/login">
                             <i class="ni ni-key-25"></i>
                             <span class="nav-link-inner--text ">Login</span>
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link nav-link-icon text-primary" to="/profile">
+                        <router-link class="nav-link nav-link-icon " to="/profile">
                             <i class="ni ni-single-02"></i>
                             <span class="nav-link-inner--text">Profile</span>
                         </router-link>
@@ -56,12 +56,12 @@
             </template>
         </base-nav>
         <!-- Header -->
-        <div class="header bg-gradient-white py-7 py-lg-8">
+        <div class="header bg-gradient-primary py-7 py-lg-8">
             <div class="container">
                 <div class="header-body text-center mb-7">
                     <div class="row justify-content-center">
                         <div class="col-lg-5 col-md-6">
-                            <h1 class="text-primary">Welcome Back!</h1> 
+                            <h1 class="text-white">Welcome Back!</h1> 
                         </div>
                     </div>
                 </div>
@@ -83,8 +83,8 @@
             <div class="container">
                 <div class="row align-items-center justify-content-xl-between">
                     <div class="col-xl-6">
-                        <div class="copyright text-center text-xl-left text-muted">
-                            &copy; {{year}} <a href="https://hamlethr.netlify.app" class="font-weight-bold ml-1"
+                        <div class="copyright text-center text-xl-left text-white">
+                            &copy; {{year}} <a href="https://hamlethr.netlify.app" class="text-white font-weight-bold ml-1"
                                                target="_blank">Hamlet</a>
                         </div>
                     </div>
