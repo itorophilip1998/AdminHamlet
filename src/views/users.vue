@@ -18,7 +18,7 @@
                     </stats-card>
                 </div>
                 <div class="col-xl-3 col-lg-6">
-                    <stats-card title="Active Users"
+                    <stats-card title="All Active Users"
                                 type="gradient-orange"
                                 sub-title="2,356"
                                 icon="ni ni-chart-pie-35"

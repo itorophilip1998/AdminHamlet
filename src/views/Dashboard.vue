@@ -1,14 +1,10 @@
 <template>
     <div>
-        <base-header type="gradient-primary" class="pb-2 pb-2 pt-5 pt-md-8 border-bottom">
-        <!-- Users --> 
-        <div class="text-left">
-          <h1>Users Stat</h1>
-        </div>
+        <base-header type="gradient-primary" class="pb-4 pt-5 pt-md-8 "> 
             <!-- Card stats -->
             <div class="row">
-                <div class="col-xl-3 col-lg-6">
-                    <stats-card title="Restricted Users"
+                <div class="col-xl-4 col-lg-6">
+                    <stats-card title="Banned Users"
                                 type="gradient-red"
                                 sub-title="350,897"
                                 icon="fa fa-users"
@@ -20,8 +16,8 @@
                         </template>
                     </stats-card>
                 </div>
-                <div class="col-xl-3 col-lg-6">
-                    <stats-card title="Active Users"
+                <div class="col-xl-4 col-lg-6">
+                    <stats-card title="Active Users "
                                 type="gradient-orange"
                                 sub-title="2,356"
                                 icon="ni ni-chart-pie-35"
@@ -29,28 +25,13 @@
                     >
 
                         <template slot="footer">
-                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 12.18%</span>
+                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 12.1%</span>
                             <span class="text-nowrap">Since last month</span>
                         </template>
                     </stats-card>
-                </div> 
-                <div class="col-xl-3 col-lg-6">
-                    <stats-card title="Subscribed Users "
-                                type="gradient-green"
-                                sub-title="924"
-                                icon="ni ni-money-coins"
-                                class="mb-4 mb-xl-0"
-                    >
-
-                        <template slot="footer">
-                            <span class="text-danger mr-2"><i class="fa fa-arrow-down"></i> 5.72%</span>
-                            <span class="text-nowrap">Since last month</span>
-                        </template>
-                    </stats-card>
-
-                </div>
-                <div class="col-xl-3 col-lg-6">
-                    <stats-card title="Total Number of Users"
+                </div>  
+                <div class="col-xl-4 col-lg-6">
+                    <stats-card title="Total Users"
                                 type="gradient-info"
                                 sub-title="49,65%"
                                 icon="ni ni-chart-bar-32"
@@ -65,15 +46,12 @@
                 </div>
             </div> 
           </base-header>
-        <base-header type="gradient-primary" class="pb-1  pt-md-1"> 
-        <!-- companies --> 
-        <div class="text-left">
-          <h1>Comapnies Stat</h1>
-        </div>
+        <base-header type="gradient-primary" class="  pb-4  pt-md-1"> 
+        
             <!-- Card stats -->
             <div class="row">
-                <div class="col-xl-3 col-lg-6">
-                    <stats-card title="Companies with less than 100 Employees"
+                <div class="col-xl-4 col-lg-6">
+                    <stats-card title="Premuim Users"
                                 type="gradient-red"
                                 sub-title="350,897"
                                 icon="fa fa-users"
@@ -85,22 +63,9 @@
                         </template>
                     </stats-card>
                 </div>
-                <div class="col-xl-3 col-lg-6">
-                    <stats-card title="Companies with more than 100 Employees"
-                                type="gradient-orange"
-                                sub-title="2,356"
-                                icon="ni ni-chart-pie-35"
-                                class="mb-4 mb-xl-0"
-                    >
-
-                        <template slot="footer">
-                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 12.18%</span>
-                            <span class="text-nowrap">Since last month</span>
-                        </template>
-                    </stats-card>
-                </div> 
-                <div class="col-xl-3 col-lg-6">
-                    <stats-card title="Banned Companies"
+              
+                <div class="col-xl-4 col-lg-6">
+                    <stats-card title="Free Mode Users"
                                 type="gradient-green"
                                 sub-title="924"
                                 icon="ni ni-money-coins"
@@ -114,8 +79,8 @@
                     </stats-card>
 
                 </div>
-                <div class="col-xl-3 col-lg-6">
-                    <stats-card title="Total Number of Companies"
+                <div class="col-xl-4 col-lg-6">
+                    <stats-card title="Banned Companies"
                                 type="gradient-info"
                                 sub-title="49,65%"
                                 icon="ni ni-chart-bar-32"
@@ -130,6 +95,55 @@
                 </div>
             </div>
         </base-header>
+        <base-header type="gradient-primary" class="pb-1 pb-4 pt-md-1"> 
+        
+        <!-- Card stats -->
+        <div class="row">
+            <div class="col-xl-4 col-lg-6">
+                <stats-card title="Companies with less than 100 Employees"
+                            type="gradient-red"
+                            sub-title="350,897"
+                            icon="fa fa-users"
+                            class="mb-4 mb-xl-0"
+                > 
+                    <template slot="footer">
+                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                        <span class="text-nowrap">Since last month</span>
+                    </template>
+                </stats-card>
+            </div>
+          
+            <div class="col-xl-4 col-lg-6">
+                <stats-card title="Companies with more than 100 Employees"
+                            type="gradient-green"
+                            sub-title="924"
+                            icon="ni ni-money-coins"
+                            class="mb-4 mb-xl-0"
+                >
+
+                    <template slot="footer">
+                        <span class="text-danger mr-2"><i class="fa fa-arrow-down"></i> 5.72%</span>
+                        <span class="text-nowrap">Since last month</span>
+                    </template>
+                </stats-card>
+
+            </div>
+            <div class="col-xl-4 col-lg-6">
+                <stats-card title="Total Number of Companies"
+                            type="gradient-info"
+                            sub-title="49,65%"
+                            icon="ni ni-chart-bar-32"
+                            class="mb-4 mb-xl-0"
+                >
+
+                    <template slot="footer">
+                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 54.8%</span>
+                        <span class="text-nowrap">Since last month</span>
+                    </template>
+                </stats-card>
+            </div>
+        </div>
+    </base-header>
 
         <!--Charts-->
         <!-- <div class="container-fluid mt--7"> -->
