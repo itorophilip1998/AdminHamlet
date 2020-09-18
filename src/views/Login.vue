@@ -54,7 +54,7 @@ import Swal from 'sweetalert2'
     methods: {
         login()
         {  
-           this.$http.post(`${this.$baseApi}/api/auth/login`, this.model).then((response)=> {
+           this.$http.post(`${this.$baseApi}/login`, this.model).then((response)=> {
             //    manipulate secured token
                localStorage.setItem(this.$token, response.data.token);  
                  Swal.fire({
@@ -67,7 +67,26 @@ import Swal from 'sweetalert2'
                 }) 
                 this.$router.push("/dashboard")
            }).catch((error)=>{
-                  console.log(error)
+                    
+                  if(error.response.status===401){
+                       Swal.fire({
+                      position: 'top-end',
+                      icon: 'warning',
+                      text: 'Incorrect credentials',
+                      showConfirmButton: false,
+                      timer: 1500,
+                      width: 400, 
+                      }) 
+                  }else{
+                      Swal.fire({
+                      position: 'top-end',
+                      icon: 'warning',
+                      text: 'Can`t Login now try again later',
+                      showConfirmButton: false,
+                      timer: 1500,
+                      width: 400, 
+                }) 
+                  }
            })
         }
     },

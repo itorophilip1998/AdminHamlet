@@ -9,15 +9,20 @@
         <sidebar-item
           :link="{
             name: 'Dashboard',
-            icon: 'ni ni-tv-2 text-primary',
+            icon: 'fa fa-tachometer-alt text-primary',
             path: '/dashboard'
           }"
-        />
+        />    
 
-        <sidebar-item :link="{name: 'Icons', icon: 'ni ni-planet text-blue', path: '/icons'}"/>
-        <sidebar-item :link="{name: 'Maps', icon: 'ni ni-pin-3 text-orange', path: '/maps'}"/>
-        <sidebar-item :link="{name: 'User Profile', icon: 'ni ni-single-02 text-yellow', path: '/profile'}"/>
-        <sidebar-item :link="{name: 'Tables', icon: 'ni ni-bullet-list-67 text-red', path: '/tables'}"/> 
+        <sidebar-item :link="{name: 'Users', icon: 'fa fa-users text-blue', path: '/users'}"/>
+        <sidebar-item :link="{name: 'Companies', icon: 'ni ni-briefcase-24 text-blue', path: '/companies'}"/>
+        <sidebar-item :link="{name: 'Chats', icon: 'fas fa-comments   text-blue', path: '/chats'}"/> 
+        <sidebar-item :link="{name: 'Feedback', icon: ' ni ni-notification-70 text-blue', path: '/feedback'}"/>
+        <sidebar-item :link="{name: 'Admin Profile', icon: 'ni ni-single-02 text-blue', path: '/profile'}"/>
+         
+        <!-- <sidebar-item :link="{name: 'Maps', icon: 'ni ni-pin-3 text-orange', path: '/maps'}"/> -->
+        <!-- <sidebar-item :link="{name: 'User Profile', icon: 'ni ni-single-02 text-yellow', path: '/profile'}"/> -->
+        <!-- <sidebar-item :link="{name: 'Tables', icon: 'ni ni-bullet-list-67 text-red', path: '/tables'}"/>  -->
 
       </template>
     </side-bar>

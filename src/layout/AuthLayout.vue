@@ -1,12 +1,12 @@
 <template>
-    <div class="main-content bg-default">
+    <div class="main-content  bg-gradient-white ">
         <!-- Navbar -->
         <base-nav class="navbar-top navbar-horizontal navbar-dark"
                   containerClasses="px-4 container"
                   expand>
             <router-link slot="brand" class="navbar-brand" to="/">
                 <!-- <img src="img/brand/white.png"/>   -->
-         <h2 >Hamlet <span class="text-white">Admin</span></h2>
+         <h2 >Hamlet <span class="text-primary">Admin</span></h2>
               
             </router-link>
 
@@ -34,20 +34,20 @@
                 <!-- Navbar items -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <router-link class="nav-link nav-link-icon" to="/">
+                        <router-link class="nav-link nav-link-icon text-primary" to="/">
                             <i class="ni ni-planet"></i>
                             <span class="nav-link-inner--text">Dashboard</span>
                         </router-link>
                     </li>
                    
                     <li class="nav-item">
-                        <router-link class="nav-link nav-link-icon" to="/login">
+                        <router-link class="nav-link nav-link-icon text-primary" to="/login">
                             <i class="ni ni-key-25"></i>
-                            <span class="nav-link-inner--text">Login</span>
+                            <span class="nav-link-inner--text ">Login</span>
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link nav-link-icon" to="/profile">
+                        <router-link class="nav-link nav-link-icon text-primary" to="/profile">
                             <i class="ni ni-single-02"></i>
                             <span class="nav-link-inner--text">Profile</span>
                         </router-link>
@@ -56,22 +56,22 @@
             </template>
         </base-nav>
         <!-- Header -->
-        <div class="header bg-gradient-success py-7 py-lg-8">
+        <div class="header bg-gradient-white py-7 py-lg-8">
             <div class="container">
                 <div class="header-body text-center mb-7">
                     <div class="row justify-content-center">
                         <div class="col-lg-5 col-md-6">
-                            <h1 class="text-white">Welcome Back!</h1> 
+                            <h1 class="text-primary">Welcome Back!</h1> 
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="separator separator-bottom separator-skew zindex-100">
+            <!-- <div class="separator separator-bottom separator-skew zindex-100">
                 <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
                      xmlns="http://www.w3.org/2000/svg">
                     <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
                 </svg>
-            </div>
+            </div> -->
         </div>
         <!-- Page content -->
         <div class="container mt--8 pb-5">

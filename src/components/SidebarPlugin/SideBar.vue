@@ -57,8 +57,9 @@
                         <div class="dropdown-divider"></div>
                         <button  @click="logout()" class="dropdown-item btn">
                             <i class="ni ni-user-run"></i>
-                            <span>Logout</span>
+                            <span> Logout</span>
                         </button>
+                       
                     </base-dropdown>
                 </ul>
             </slot>
@@ -88,9 +89,9 @@
                 <ul class="navbar-nav mb-md-3">
                     <li class="nav-item">
                         <button @click="logout()" class="nav-link btn w-100 m-auto">
-                            <i class="ni ni-spaceship"></i>Logout
+                            <i class="ni ni-spaceship text-blue"></i> <span class="text-muted">Logout</span>
                         </button>
-                    </li> 
+                    </li>  
                 </ul>
             </div>
             </div>

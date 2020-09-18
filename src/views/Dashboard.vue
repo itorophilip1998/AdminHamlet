@@ -1,16 +1,19 @@
 <template>
     <div>
-        <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
+        <base-header type="gradient-primary" class="pb-2 pb-2 pt-5 pt-md-8 border-bottom">
+        <!-- Users --> 
+        <div class="text-left">
+          <h1>Users Stat</h1>
+        </div>
             <!-- Card stats -->
             <div class="row">
                 <div class="col-xl-3 col-lg-6">
-                    <stats-card title="Total traffic"
+                    <stats-card title="Restricted Users"
                                 type="gradient-red"
                                 sub-title="350,897"
-                                icon="ni ni-active-40"
+                                icon="fa fa-users"
                                 class="mb-4 mb-xl-0"
-                    >
-
+                    > 
                         <template slot="footer">
                             <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
                             <span class="text-nowrap">Since last month</span>
@@ -18,7 +21,7 @@
                     </stats-card>
                 </div>
                 <div class="col-xl-3 col-lg-6">
-                    <stats-card title="Total traffic"
+                    <stats-card title="Active Users"
                                 type="gradient-orange"
                                 sub-title="2,356"
                                 icon="ni ni-chart-pie-35"
@@ -30,9 +33,9 @@
                             <span class="text-nowrap">Since last month</span>
                         </template>
                     </stats-card>
-                </div>
+                </div> 
                 <div class="col-xl-3 col-lg-6">
-                    <stats-card title="Sales"
+                    <stats-card title="Subscribed Users "
                                 type="gradient-green"
                                 sub-title="924"
                                 icon="ni ni-money-coins"
@@ -47,7 +50,72 @@
 
                 </div>
                 <div class="col-xl-3 col-lg-6">
-                    <stats-card title="Performance"
+                    <stats-card title="Total Number of Users"
+                                type="gradient-info"
+                                sub-title="49,65%"
+                                icon="ni ni-chart-bar-32"
+                                class="mb-4 mb-xl-0"
+                    >
+
+                        <template slot="footer">
+                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 54.8%</span>
+                            <span class="text-nowrap">Since last month</span>
+                        </template>
+                    </stats-card>
+                </div>
+            </div> 
+          </base-header>
+        <base-header type="gradient-primary" class="pb-1  pt-md-1"> 
+        <!-- companies --> 
+        <div class="text-left">
+          <h1>Comapnies Stat</h1>
+        </div>
+            <!-- Card stats -->
+            <div class="row">
+                <div class="col-xl-3 col-lg-6">
+                    <stats-card title="Companies with less than 100 Employees"
+                                type="gradient-red"
+                                sub-title="350,897"
+                                icon="fa fa-users"
+                                class="mb-4 mb-xl-0"
+                    > 
+                        <template slot="footer">
+                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                            <span class="text-nowrap">Since last month</span>
+                        </template>
+                    </stats-card>
+                </div>
+                <div class="col-xl-3 col-lg-6">
+                    <stats-card title="Companies with more than 100 Employees"
+                                type="gradient-orange"
+                                sub-title="2,356"
+                                icon="ni ni-chart-pie-35"
+                                class="mb-4 mb-xl-0"
+                    >
+
+                        <template slot="footer">
+                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 12.18%</span>
+                            <span class="text-nowrap">Since last month</span>
+                        </template>
+                    </stats-card>
+                </div> 
+                <div class="col-xl-3 col-lg-6">
+                    <stats-card title="Banned Companies"
+                                type="gradient-green"
+                                sub-title="924"
+                                icon="ni ni-money-coins"
+                                class="mb-4 mb-xl-0"
+                    >
+
+                        <template slot="footer">
+                            <span class="text-danger mr-2"><i class="fa fa-arrow-down"></i> 5.72%</span>
+                            <span class="text-nowrap">Since last month</span>
+                        </template>
+                    </stats-card>
+
+                </div>
+                <div class="col-xl-3 col-lg-6">
+                    <stats-card title="Total Number of Companies"
                                 type="gradient-info"
                                 sub-title="49,65%"
                                 icon="ni ni-chart-bar-32"
@@ -64,8 +132,8 @@
         </base-header>
 
         <!--Charts-->
-        <div class="container-fluid mt--7">
-            <div class="row">
+        <!-- <div class="container-fluid mt--7"> -->
+            <!-- <div class="row">
                 <div class="col-xl-8 mb-5 mb-xl-0">
                     <card type="default" header-classes="bg-transparent">
                         <div slot="header" class="row align-items-center">
@@ -124,39 +192,39 @@
                         </bar-chart>
                     </card>
                 </div>
-            </div>
+            </div> -->
             <!-- End charts-->
 
             <!--Tables-->
-            <div class="row mt-5">
+            <!-- <div class="row mt-5">
                 <div class="col-xl-8 mb-5 mb-xl-0">
                     <page-visits-table></page-visits-table>
                 </div>
                 <div class="col-xl-4">
                     <social-traffic-table></social-traffic-table>
                 </div>
-            </div>
+            </div> -->
             <!--End tables-->
-        </div>
+        <!-- </div> -->
 
     </div>
 </template>
 <script>
   // Charts
-  import * as chartConfigs from '@/components/Charts/config';
-  import LineChart from '@/components/Charts/LineChart';
-  import BarChart from '@/components/Charts/BarChart';
+  // import * as chartConfigs from '@/components/Charts/config';
+  // import LineChart from '@/components/Charts/LineChart';
+  // import BarChart from '@/components/Charts/BarChart';
 
   // Tables
-  import SocialTrafficTable from './Dashboard/SocialTrafficTable';
-  import PageVisitsTable from './Dashboard/PageVisitsTable';
+  // import SocialTrafficTable from './Dashboard/SocialTrafficTable';
+  // import PageVisitsTable from './Dashboard/PageVisitsTable';
 
   export default {
     components: {
-      LineChart,
-      BarChart,
-      PageVisitsTable,
-      SocialTrafficTable,
+      // LineChart,
+      // BarChart,
+      // PageVisitsTable,
+      // SocialTrafficTable,
     },
     data() {
       return {
@@ -170,7 +238,7 @@
             datasets: [],
             labels: [],
           },
-          extraOptions: chartConfigs.blueChartOptions,
+          // extraOptions: chartConfigs.blueChartOptions,
         },
         redBarChart: {
           chartData: {
