@@ -8,7 +8,7 @@
             </navbar-toggle-button>
             <router-link class="navbar-brand" to="/">
                 <!-- <img :src="logo" class="navbar-brand-img" alt="..."> -->
-         <h2>Hamlet <span class="text-primary">Admin</span>
+         <h2><img src="img/brand/hamlet.png" style="width: 40px;">Hamlet <span class="text-primary">Admin</span>
          </h2>
             </router-link> 
             <slot name="mobile-right">

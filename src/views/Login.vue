@@ -3,7 +3,7 @@
 <!-- navbar -->
 <nav class="navbar  navbar-expand-md navbar-light shadow border p-2 w-100">
   <div class="container-fluid">
-    <a class="navbar-brand " href="#"> <img src="../../public/img/brand/hamlet.png" style="width: 40px;"> <b>Hamlet<span class="text-primary">Admin</span></b></a>
+    <a class="navbar-brand " href="#"> <img src="img/brand/hamlet.png" style="width: 40px;"> <b>Hamlet<span class="text-primary">Admin</span></b></a>
   <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
       aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
