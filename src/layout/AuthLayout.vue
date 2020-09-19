@@ -21,8 +21,3 @@
     }
   }
 </script>
-<style>
-body{
-    background: white !important;
-}
-</style>

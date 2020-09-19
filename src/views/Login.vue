@@ -24,7 +24,7 @@
 
 
 
-<div class="row  m-0 ">
+<div class="row  m-0 app">
   <div class="col-md-6 pt-5">
   
           <div class="row justify-content-center">
@@ -116,7 +116,7 @@
         this.flashMessage.show({
         status: 'warning', 
         html: '<span class="p-2 " style="border-left:5px solid grey">Failed to access server,No internet Connection!</span>', 
-        time: 1800,
+        time: 2000,
     });
  } 
     },
@@ -136,29 +136,29 @@
                       this.flashMessage.show({
                         status: 'error', 
                          html: '<span class="p-2 " style="border-left:5px solid grey">Incorrect Credentials(Password or Email)</span>', 
-                        time: 1800,
+                        time: 2000,
                     });
                           
                   }else{
                     this.loader=false
                         this.flashMessage.show({
                           status: 'warning', 
-                          html: '<span class="p-2 " style="border-left:5px solid grey">Oh, you broke my heart! Shame on you!</span>', 
-                          time: 1800,
+                          html: '<span class="p-2 " style="border-left:5px solid grey">Something went wrong, please try again later!</span>', 
+                          time: 2000,
                       }); 
                }
-           
-
-           }) 
+             
+           })  
         }
     },
   }
 </script>
 
-<style lang="scss" scoped>
-  body{
-   background-image: url(../assets/images/bg4.jpg) !important;
-   background-size:cover
-  }
 
+<style lang="scss" scoped>
+  .app{ 
+   background-image: url(../assets/images/bg4.jpg) !important;
+   /* background-size:cover */
+   
+  }
 </style>
