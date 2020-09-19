@@ -160,5 +160,5 @@
    background-image: url(../assets/images/bg4.jpg) !important;
    /* background-size:cover */
    
-  }
+  }  
 </style>
