@@ -40,26 +40,29 @@
                             <base-input class="input-group-alternative shadow mb-4 border"
                                         placeholder="Email"
                                         addon-left-icon="ni ni-email-83 text-primary"
-                                        v-model="model.email">
+                                        v-model="model.email" >
                             </base-input>
+                            
                             <base-input class="input-group-alternative shadow border"
                                         placeholder="Password"
                                         type="password"
                                         addon-left-icon="ni ni-lock-circle-open text-primary"
-                                        v-model="model.password">
+                                        v-model="model.password" id="password">
                             </base-input>
-
+                            <a v-if="!check" @click="checkIn()" class="fa fa-eye text-primary checks"></a>
+                            <a v-if="check" @click="checkOut()" class="fa fa-eye-slash text-danger checks"></a>
                             <base-checkbox class="custom-control-alternative">
                                 <span class="text-muted">Remember me</span>
                             </base-checkbox>
-                            <div class="text-center">
-                              
+                            
+                            <div class="text-center"> 
                                   <div v-if="loader" class="text-center pt-5" id="overlay">
                                     <i style="z-index: 2;"  class="fas my-3 fa-spinner fa-5x text-white fa-pulse"></i> <br>
                                             <h1 class="text-white">Loading <span class="text-danger">.</span><span class="text-info">.</span><span class="text-warning">.</span></h1>
                                   </div>
 
-                                <base-button  type="primary" @click="login()" class="my-4 w-100 shadow p-2">Login</base-button>
+                                <base-button v-if="model.email !='' && model.password !=''"  type="primary" @click="login()" class="my-4 w-100 shadow p-2" >Login</base-button>
+                                <base-button v-if="model.email =='' && model.password ==''"  type="primary" class="my-4 w-100 shadow p-2 disabled"  disabled="true" style="cursor:not-allowed;">Login</base-button>
 
 
                             </div>
@@ -99,7 +102,8 @@
           email: '',
           password: ''
         },
-        loader:false
+        loader:false,
+        check:false,
       }
     },
     computed: {
@@ -110,6 +114,19 @@
     },
 
     methods: {
+      checkIn(){ 
+         var x = document.getElementById("password"); 
+          x.type = "text"; 
+        this.check=!this.check  
+       
+      },
+      checkOut(){ 
+         var x = document.getElementById("password"); 
+          x.type = "password"; 
+         this.check=!this.check  
+     
+
+      },
       status(){
       if(!navigator.onLine){
         this.loader=false 
@@ -160,5 +177,13 @@
    background-image: url(../assets/images/bg4.jpg) !important;
    /* background-size:cover */
    
+  }
+  .checks
+  {
+    cursor: pointer;
+    position:relative;
+    left:90%;
+    top:-55px; 
+    /* z-index: 1 !important; */
   }
 </style>
