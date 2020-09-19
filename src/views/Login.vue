@@ -4,11 +4,11 @@
 <nav class="navbar  navbar-expand-md navbar-light shadow border p-2 w-100">
   <div class="container-fluid">
     <a class="navbar-brand " href="#"> <img src="img/brand/hamlet.png" style="width: 40px;"> <b>Hamlet<span class="text-primary">Admin</span></b></a>
-  <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+  <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
       aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="collapsibleNavId">
+  <div class="navbar-collapse " id="collapsibleNavId"> 
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             <li class="nav-item mx-1">
                 <a class="btn shadow btn-sm btn-primary" href="https://hamlethr.netlify.app/signin">Login</a>
@@ -33,14 +33,17 @@
                  
                     <div class="card-body px-lg-5 py-lg-5">
                         <div class="text-center  mb-4">
-                            <h1 class="text-primary">Sign in</h1>
+                            <h1 class="text-primary d-none d-md-block">Sign in</h1>
+                            <h1 class="text-primary d-block d-md-none">Welcome Back!</h1>
                             <hr class="m-1 p-0">
                         </div>
                         <form role="form">
                             <base-input class="input-group-alternative shadow mb-4 border"
                                         placeholder="Email"
                                         addon-left-icon="ni ni-email-83 text-primary"
-                                        v-model="model.email" >
+                                        v-model="model.email"
+                                        type="email"
+                                         >
                             </base-input>
                             
                             <base-input class="input-group-alternative shadow border"
@@ -62,8 +65,7 @@
                                   </div>
 
                                 <base-button v-if="model.email !='' && model.password !=''"  type="primary" @click="login()" class="my-4 w-100 shadow p-2" >Login</base-button>
-                                <base-button v-if="model.email =='' && model.password ==''"  type="primary" class="my-4 w-100 shadow p-2 disabled"  disabled="true" style="cursor:not-allowed;">Login</base-button>
-
+                             <button v-if="model.email =='' || model.password ==''"  type="primary"  class="my-4 btn btn-primary w-100 shadow p-2 disabled"  disabled="true" style="cursor:not-allowed;opacity:60% !important">Login</button>
 
                             </div>
                         </form>
@@ -88,12 +90,14 @@
     </div>
   </div>
 </div> 
-<FlashMessage :position="'right bottom'"></FlashMessage>
+<FlashMessage :position="'right bottom'"></FlashMessage>  
+<script   type="application/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script   type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script  type="application/javascript"  src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
        </div>
 </template>
-<script> 
-// import Swal from 'sweetalert2'
+<script>  
   export default { 
     name: 'login',
     data() {
@@ -106,11 +110,11 @@
         check:false,
       }
     },
-    computed: {
+    components: {
    
     }, 
     mounted() {  
-
+      
     },
 
     methods: {

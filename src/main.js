@@ -3,8 +3,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import './registerServiceWorker'
-// import 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'
+import './registerServiceWorker'  
 import FlashMessage from '@smartweb/vue-flash-message';
 Vue.use(FlashMessage);
 import ArgonDashboard from './plugins/argon-dashboard'
