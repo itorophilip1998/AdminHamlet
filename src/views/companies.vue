@@ -25,6 +25,7 @@
     components: {
       ProjectsTable
     }
+    
   };
 </script>
 <style></style>

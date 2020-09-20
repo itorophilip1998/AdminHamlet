@@ -10,7 +10,7 @@
           </h3>
         </div>
         <div class="col text-right">
-          <base-button type="primary" size="sm">See all</base-button>
+          <base-button type="primary" size="sm">See all </base-button>
         </div>
       </div>
     </div>
@@ -20,43 +20,44 @@
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'"
                   tbody-classes="list"
-                  :data="tableData">
+                  :data="users">
         <template slot="columns">
           <th>Users</th>
           <th>Email</th>
-          <th>Status</th>
+          <th>Number of Employees</th>
           <th>companies</th>
-          <th>Completion</th>
-          <th></th>
+          <th>Status</th>
+          <th>Actions</th>
         </template>
-
-        <template slot-scope="{row}">
+        <template slot-scope="{row}"> 
           <th scope="row">
             <div class="media align-items-center">
               <a href="#" class="avatar rounded-circle mr-3">
-                <img alt="Image placeholder" :src="row.picture">
+                <img alt="Image placeholder" :src="row.profile.profile_pic">
               </a>
               <div class="media-body">
-                <span class="name mb-0 text-sm">{{row.title}}</span>
+                <span class="name mb-0 text-sm">{{row.username}}</span>
               </div>
             </div>
           </th>
           <td class="budget">
-            {{row.budget}}
+            {{row.email}}
           </td>
           <td>
-            <badge class="badge-dot mr-4" :type="row.statusType">
-              <i :class="`bg-${row.statusType}`"></i>
-              <span class="status">{{row.status}}</span>
+            <badge class="badge-dot mr-4" >
+               
+              <span class="status">{{(row.employees.length >= 0) ? "No employee" : row.employees.length}}</span>
             </badge>
           </td>
           <td>
-            <div class="avatar-group">
-              <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
-                <img alt="Image placeholder" :src="row.picture">
-              </a>
-             
+            <div class="text-center avatar-group">
+              <a v-if="row.company && row.company.company_logo" href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
+                <img  alt="Image placeholder" :src="row.company.company_logo">
+              </a> <br>
+                   <span class=""> {{(row.company) ? row.company.company_name: "No company Registed"}}  </span>
+
             </div>
+            
           </td>
 
           <td>
@@ -79,9 +80,10 @@
               </a>
 
               <template>
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item text-primary" href="#">View User <i class="fa fa-eye float-right" aria-hidden="true"></i></a>
+                <a class="dropdown-item text-danger" href="#">Barn User <i class="fas float-right fa-hand-paper    "></i></a>
+                <a class="dropdown-item text-info" href="#">Chat with User <i class="fa fa-comments float-right" aria-hidden="true"></i></a> 
+            
               </template>
             </base-dropdown>
           </td>
@@ -109,59 +111,21 @@
     },
     data() {
       return {
-        tableData: [
-          {
-            img: 'img/theme/bootstrap.jpg',
-            title: 'Argon Design System',
-            budget: '$2500 USD',
-            status: 'pending',
-            statusType: 'warning',
-            completion: 60,
-            picture:'img/theme/team-1-800x800.jpg'
-          },
-          {
-            img: 'img/theme/angular.jpg',
-            title: 'Angular Now UI Kit PRO',
-            budget: '$1800 USD',
-            status: 'completed',
-            statusType: 'success',
-            completion: 100,
-            picture:'img/theme/team-1-800x800.jpg'
+        users:{},
+       }
+    },
+    created() {
+        this.getuser();
+    },
+    methods: {
+        getuser()
+        {
+         this.$http.get(`${this.$baseApi}/user`,{headers:{'Authorization':`Bearer ${this.$token}`}}).then((response)=> {
+               this.users=response.data.user
+         })
 
-          },
-          {
-            img: 'img/theme/sketch.jpg',
-            title: 'Black Dashboard',
-            budget: '$3150 USD',
-            status: 'delayed',
-            statusType: 'danger',
-            completion: 72,
-            picture:'img/theme/team-4-800x800.jpg'
-
-          },
-          {
-            img: 'img/theme/react.jpg',
-            title: 'React Material Dashboard',
-            budget: '$4400 USD',
-            status: 'on schedule',
-            statusType: 'info',
-            completion: 90,
-            picture:'img/theme/team-2-800x800.jpg'
-
-          },
-          {
-            img: 'img/theme/vue.jpg',
-            title: 'Vue Paper UI Kit PRO',
-            budget: '$2200 USD',
-            status: 'completed',
-            statusType: 'success',
-            completion: 100,
-            picture:'img/theme/team-3-800x800.jpg'
-
-          }
-        ]
-      }
-    }
+        }
+    },
   }
 </script>
 <style>
