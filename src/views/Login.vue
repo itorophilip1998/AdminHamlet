@@ -57,10 +57,10 @@
   <div class="col-md-6 pt-5">
   
           <div class="row justify-content-center">
-            <div class="col-sm-10">
+            <div class="col-sm-10 ">
                 <div class="card bg-white border-0 ">
                  
-                    <div class="card-body px-lg-5 py-lg-5">
+                    <div class="card-body px-lg-5 px-0 py-lg-5">
                         <div class="text-center  mb-4">
                             <h1 class="text-primary d-none d-md-block">Sign in</h1>
                             <h1 class="text-primary d-block d-md-none">Welcome Back!</h1>
@@ -72,7 +72,7 @@
                             <span aria-hidden="true">&times;</span>
                             <span class="sr-only">Close</span>
                           </button>
-                          <strong>Error!</strong> Incorrect Credentials(Password or Email)
+                          <strong >Error!</strong> Incorrect Credentials
                         </div>
                         <form role="form">
                             <base-input class="input-group-alternative text shadow mb-4 border"
