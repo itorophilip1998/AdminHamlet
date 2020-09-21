@@ -2,7 +2,7 @@
     <div>
           <base-header type="gradient-primary" class="pb-2 pb-6 pt-5 pt-md-8">  
             
-        </base-header>
+          </base-header>
         <div class="container-fluid mt--7">
             <div class="row">
                 <div class="col">

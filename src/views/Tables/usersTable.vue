@@ -5,8 +5,9 @@
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row align-items-center">
         <div class="col">
-          <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
-            {{title}}
+          <h3 class="mb-0 " :class="type === 'dark' ? 'text-white': ''">
+          <input type="text" v-model="search" placeholder="search by Name or Email" class="form-control shadow pr-5">
+          <i class="fas fa-search   text-muted "></i>
           </h3>
         </div>
         <div class="col text-right">
@@ -16,21 +17,22 @@
     </div>
 
     <div class="table-responsive">
-      <base-table class="table align-items-center table-flush"
+      
+      <base-table  class="table table-hover  align-items-center table-flush"
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'"
                   tbody-classes="list"
-                  :data="users">
+                  :data="filteredAll">
         <template slot="columns">
           <th>Users</th>
           <th>Email</th>
           <th>Number of Employees</th>
           <th>companies</th>
-          <th>Status</th>
+          <th>Registered</th>
           <th>Actions</th>
         </template>
-        <template slot-scope="{row}"> 
-          <th scope="row">
+        <template   slot-scope="{row}"> 
+          <th @click="link(row.email)" style="cursor: pointer;" scope="row">
             <div class="media align-items-center">
               <a href="#" class="avatar rounded-circle mr-3">
                 <img alt="Image placeholder" :src="row.profile.profile_pic">
@@ -40,39 +42,34 @@
               </div>
             </div>
           </th>
-          <td class="budget">
+          <th  @click="link(row.email)" style="cursor: pointer;">
             {{row.email}}
-          </td>
-          <td>
-            <badge class="badge-dot mr-4" >
-               
+          </th>
+          <th @click="link(row.email)" style="cursor: pointer;">
+            <badge class="badge-dot mr-4" > 
               <span class="status">{{(row.employees.length >= 0) ? "No employee" : row.employees.length}}</span>
             </badge>
-          </td>
-          <td>
+          </th>
+          <th @click="link(row.email)" style="cursor: pointer;">
             <div class="text-center avatar-group">
               <a v-if="row.company && row.company.company_logo" href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
                 <img  alt="Image placeholder" :src="row.company.company_logo">
               </a> <br>
-                   <span class=""> {{(row.company) ? row.company.company_name: "No company Registed"}}  </span>
+                   <span class=""> {{(row.company) ? row.company.company_name: "No company Registered"}}  </span>
 
             </div>
             
-          </td>
+          </th>
 
-          <td>
+          <th @click="link(row.email)" style="cursor: pointer;">
             <div class="d-flex align-items-center">
-              <span class="completion mr-2">{{row.completion}}%</span>
-              <div>
-                <base-progress :type="row.statusType"
-                               :show-percentage="false"
-                               class="pt-0"
-                               :value="row.completion"/>
+              <span class="completion mr-2">{{registeredOn(row.created_at)}}</span>
+              <div> 
               </div>
             </div>
-          </td>
+          </th>
 
-          <td class="text-right">
+          <th class="text-right">
             <base-dropdown class="dropdown"
                            position="right">
               <a slot="title" class="btn btn-sm btn-icon-only text-light" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -80,13 +77,13 @@
               </a>
 
               <template>
-                <a class="dropdown-item text-primary" href="#">View User <i class="fa fa-eye float-right" aria-hidden="true"></i></a>
-                <a class="dropdown-item text-danger" href="#">Barn User <i class="fas float-right fa-hand-paper    "></i></a>
+                <router-link class="dropdown-item text-primary" :to="`/user/${row.email}`">View User <i class="fa fa-eye float-right" aria-hidden="true"></i></router-link>
+                <a class="dropdown-item text-danger" href="#">Barn User <i class="fas float-right fa-hand-paper"></i></a>
                 <a class="dropdown-item text-info" href="#">Chat with User <i class="fa fa-comments float-right" aria-hidden="true"></i></a> 
             
               </template>
             </base-dropdown>
-          </td>
+          </th>
 
         </template>
 
@@ -95,12 +92,13 @@
 
     <div class="card-footer d-flex justify-content-end"
          :class="type === 'dark' ? 'bg-transparent': ''">
-      <base-pagination total="30"></base-pagination>
+      <!-- <base-pagination total="30"></base-pagination> -->
     </div>
 
   </div>
 </template>
 <script>
+import moment from 'moment'
   export default {
     name: 'projects-table',
     props: {
@@ -111,22 +109,57 @@
     },
     data() {
       return {
-        users:{},
+        users:[],
+        search:''
        }
     },
     created() {
-        this.getuser();
+        this.getuser();  
     },
+    computed: {
+      filteredAll()
+      {
+        return this.users.filter((post) => {
+        return (
+          post.username
+            .toLowerCase()
+            .match(
+              this.search.toLowerCase() || this.search.toUpperCase()
+            ) ||
+          post.email
+            .toLowerCase()
+            .match(
+              this.search.toLowerCase() || this.search.toUpperCase()
+            )
+        );
+      });
+      }
+     },
     methods: {
+     
+    link(email)
+    {
+       this.$router.push(`/user/${email}`)
+    }, 
+        registeredOn(time)
+       {
+         return moment(time, "YYYYMMDD").fromNow(); 
+        //  moment(time).format("DD/MM/YYYY")
+       },
         getuser()
         {
          this.$http.get(`${this.$baseApi}/user`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
                this.users=response.data.user
-         })
-
+         }) 
         }
     },
   }
 </script>
-<style>
+<style lang="scss" scoped>
+  .fa-search
+  {
+    position: relative;
+    top: -30px;
+    right: -90%;
+  }
 </style>
