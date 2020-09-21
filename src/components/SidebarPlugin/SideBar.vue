@@ -3,12 +3,12 @@
         <div class="container-fluid">
 
             <!--Toggler-->
-            <navbar-toggle-button @click.native="showSidebar">
+            <!-- <navbar-toggle-button @click.native="showSidebar">
                 <span class="navbar-toggler-icon"></span>
-            </navbar-toggle-button>
+            </navbar-toggle-button> -->
             <router-link class="navbar-brand" to="/">
                 <!-- <img :src="logo" class="navbar-brand-img" alt="..."> -->
-         <h2><img src="img/brand/hamlet.png" style="width: 40px;">Hamlet <span class="text-primary">Admin</span>
+         <h2 ><img src="img/brand/hamlet.png" style="width: 40px;">Hamlet <span class="text-primary">Admin</span>
          </h2>
             </router-link> 
             <slot name="mobile-right">
@@ -36,23 +36,28 @@
                         </a>
 
                         <div class=" dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Welcome!</h6>
+                            <h6 class="text-overflow m-0">Activities!</h6>
                         </div>
                         <router-link to="/profile" class="dropdown-item">
                             <i class="ni ni-single-02"></i>
                             <span>My profile</span>
                         </router-link>
-                        <router-link to="/profile" class="dropdown-item">
-                            <i class="ni ni-settings-gear-65"></i>
-                            <span>Settings</span>
+                        
+                        <router-link to="/dashboard" class="dropdown-item">
+                            <i class="fa fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
                         </router-link>
-                        <router-link to="/profile" class="dropdown-item">
-                            <i class="ni ni-calendar-grid-58"></i>
-                            <span>Activity</span>
+                        <router-link to="/users" class="dropdown-item">
+                            <i class="fa fa-users"></i>
+                            <span>Users</span>
                         </router-link>
-                        <router-link to="/profile" class="dropdown-item">
-                            <i class="ni ni-support-16"></i>
-                            <span>Support</span>
+                        <router-link to="/chats" class="dropdown-item">
+                            <i class="fas fa-comments"></i>
+                            <span>Chats</span>
+                        </router-link>
+                        <router-link to="/feedback" class="dropdown-item">
+                            <i class=" ni ni-notification-70"></i>
+                            <span>Feedback</span>
                         </router-link>
                         <div class="dropdown-divider"></div>
                         <button  @click="logout()" class="dropdown-item btn">
@@ -89,7 +94,7 @@
                 <ul class="navbar-nav mb-md-3">
                     <li class="nav-item">
                         <button @click="logout()" class="nav-link btn w-100 m-auto">
-                            <i class="ni ni-spaceship text-blue"></i> <span class="text-muted">Logout</span>
+                            <i class="ni ni-user-run text-blue"></i> <span class="text-muted">Logout</span>
                         </button>
                     </li>  
                 </ul>
@@ -124,9 +129,20 @@
     },
     methods: {
       logout()
-      {
-        localStorage.removeItem(this.$token)
-        this.$router.push("/login") 
+      { 
+          localStorage.removeItem(this.$token)
+             this.$router.push("/login")  
+        // this.$http.post(`https://hamlet.payfill.co/api/auth/logout`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
+        //        console.log(response)
+        //  })
+     
+
+          // let token =localStorage.getItem(this.$token) 
+          //  this.$http.post(`https://hamlet.payfill.co/api/auth/logout`, 
+          //  {headers:{'Authorization':`Bearer ${token}`}}).then((response)=> {
+          //   localStorage.removeItem(this.$token)
+          //    this.$router.push("/login")  
+          //  })
       },
       closeSidebar() {
         this.$sidebar.displaySidebar(false)

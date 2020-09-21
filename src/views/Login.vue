@@ -96,6 +96,7 @@
                             </base-checkbox>
                             
                             <div class="text-center"> 
+                              <!-- loader -->
                                   <div v-if="loader" class="text-center pt-5" id="overlay">
                                     <i style="z-index: 2;"  class="fas my-3 fa-spinner fa-5x text-white fa-pulse"></i> <br>
                                             <h1 class="text-white">Loading <span class="text-danger">.</span><span class="text-info">.</span><span class="text-warning">.</span></h1>
@@ -190,8 +191,7 @@
             this.status() 
            this.$http.post(`${this.$baseApi}/login`, this.model).then((response)=> {
             this.loader=false
-            //    manipulate secured token
-
+            //    manipulate secured token 
              localStorage.setItem(this.$token, response.data.token);   
             this.$router.push("/dashboard")
            }).catch((error)=>{
@@ -236,7 +236,7 @@
   }
   .sidebar
   {
-    background: white;
+    background: rgb(219, 218, 218);
     position: absolute;
     width: 250px;
     height: 100vh;

@@ -93,7 +93,7 @@
     methods: {
         getProfile()
         {
-         this.$http.get(`${this.$baseApi}/profile`,{headers:{'Authorization':`Bearer ${this.$token}`}}).then((response)=> {
+         this.$http.get(`${this.$baseApi}/profile`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
                console.log(response)
          })
 

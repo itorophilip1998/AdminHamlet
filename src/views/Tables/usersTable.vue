@@ -120,7 +120,7 @@
     methods: {
         getuser()
         {
-         this.$http.get(`${this.$baseApi}/user`,{headers:{'Authorization':`Bearer ${this.$token}`}}).then((response)=> {
+         this.$http.get(`${this.$baseApi}/user`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
                this.users=response.data.user
          })
 
