@@ -74,6 +74,7 @@
     name: 'user-profile',
     data() {
       return {
+          params:this.$route.params.email,
         model: {
           username: '',
           email: '',
@@ -89,11 +90,12 @@
     },
     created() {
         this.getProfile();
+        console.log(this.params)
     },
     methods: {
         getProfile()
         {
-         this.$http.get(`${this.$baseApi}/user/${this.$route.params.email}`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
+         this.$http.get(`${this.$baseApi}/user/${this.params}`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
                console.log(response)
          })
 
