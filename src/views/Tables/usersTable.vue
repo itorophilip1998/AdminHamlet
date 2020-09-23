@@ -34,7 +34,7 @@
           <th @click="link(row.email)" style="cursor: pointer;" scope="row">
             <div class="media align-items-center">
               <a href="#" class="avatar rounded-circle mr-3">
-                <img v-if="row.profile" alt="Image placeholder" :src="row.profile.profile_pic">
+                <img v-if="row.profile" class="w-100 h-100"   :src="row.profile.profile_pic">
               </a>
               <div class="media-body">
                 <span class="name mb-0 text-sm">{{row.username}}</span>
@@ -52,7 +52,7 @@
           <th @click="link(row.email)" style="cursor: pointer;">
             <div class="text-center avatar-group">
               <a v-if="row.company && row.company.company_logo" href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
-                <img  alt="Image placeholder" :src="row.company.company_logo">
+                <img   class="w-100 h-100" :src="row.company.company_logo">
               </a> <br>
                    <span class=""> {{(row.company) ? row.company.company_name: "No company Registered"}}  </span>
 
