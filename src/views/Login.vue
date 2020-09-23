@@ -97,9 +97,12 @@
                             
                             <div class="text-center"> 
                               <!-- loader -->
-                                  <div v-if="loader" class="text-center pt-5" id="overlay">
-                                    <i style="z-index: 2;"  class="fas my-3 fa-spinner fa-5x text-white fa-pulse"></i> <br>
-                                            <h1 class="text-white">Loading <span class="text-danger">.</span><span class="text-info">.</span><span class="text-warning">.</span></h1>
+                                  <div v-if="loader" class="text-center pt-5" id="overlay"> 
+                                    <div class="loading">
+                                      <i style="z-index: 2;"  class="fas my-3  fa-spinner fa-5x text-white fa-pulse"></i> <br>
+                                      <h1 class="text-white">Loading <span class="text-danger">.</span><span class="text-info">.</span><span class="text-warning">.</span></h1>
+                                    </div>
+                                   
                                   </div>
 
                                 <base-button v-if="model.email !='' && model.password !=''"  type="primary" @click="login()" class="my-4 w-100 shadow p-2" >Login</base-button>
@@ -269,4 +272,8 @@
     z-index: 0 !important;
 
   }
+  .loading{
+    margin-top: 200px;
+  }
+   
 </style>

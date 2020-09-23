@@ -6,7 +6,7 @@
       <div class="row align-items-center">
         <div class="col">
           <h3 class="mb-0 " :class="type === 'dark' ? 'text-white': ''">
-          <input type="text" v-model="search" placeholder="search by Name or Email" class="form-control shadow pr-5">
+          <input type="text" v-model="search" placeholder="search by All the fields" class="form-control shadow pr-5">
           <i class="fas fa-search   text-muted "></i>
           </h3>
         </div>
@@ -16,8 +16,7 @@
       </div>
     </div>
 
-    <div class="table-responsive">
-      
+    <div class="table-responsive">  
       <base-table  class="table table-hover  align-items-center table-flush"
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'"
@@ -35,7 +34,7 @@
           <th @click="link(row.email)" style="cursor: pointer;" scope="row">
             <div class="media align-items-center">
               <a href="#" class="avatar rounded-circle mr-3">
-                <img alt="Image placeholder" :src="row.profile.profile_pic">
+                <img v-if="row.profile" alt="Image placeholder" :src="row.profile.profile_pic">
               </a>
               <div class="media-body">
                 <span class="name mb-0 text-sm">{{row.username}}</span>
@@ -62,8 +61,9 @@
           </th>
 
           <th @click="link(row.email)" style="cursor: pointer;">
-            <div class="d-flex align-items-center">
-              <span class="completion mr-2">{{registeredOn(row.created_at)}}</span>
+            <div class=" align-items-center">
+              <span class="completion mr-2">{{registeredOn(row.created_at)}}</span> <br>
+              <small class="">{{registeredTime(row.created_at)}}</small>
               <div> 
               </div>
             </div>
@@ -91,15 +91,22 @@
     </div>
 
     <div class="card-footer d-flex justify-content-end"
-         :class="type === 'dark' ? 'bg-transparent': ''">
-      <!-- <base-pagination total="30"></base-pagination> -->
+         :class="type === 'dark' ? 'bg-transparent': ''"> 
+      <!-- <base-pagination total="4"></base-pagination> -->
+
+      <pagination :data="paginate" @pagination-change-page="getuser"></pagination>
+
     </div>
 
   </div>
 </template>
 <script>
 import moment from 'moment'
+import pagination from 'laravel-vue-pagination'
   export default {
+    components:{
+      pagination
+    },
     name: 'projects-table',
     props: {
       type: {
@@ -110,16 +117,18 @@ import moment from 'moment'
     data() {
       return {
         users:[],
-        search:''
+        search:'',
+        paginate:[]
        }
     },
-    created() {
+    mounted() {
         this.getuser();  
     },
     computed: {
       filteredAll()
-      {
-        return this.users.filter((post) => {
+      {  
+        return this.users
+        .filter((post) => {
         return (
           post.username
             .toLowerCase()
@@ -131,6 +140,13 @@ import moment from 'moment'
             .match(
               this.search.toLowerCase() || this.search.toUpperCase()
             )
+            ||
+          post.company.company_name
+            .toLowerCase()
+            .match(
+              this.search.toLowerCase() || this.search.toUpperCase()
+            ) 
+           
         );
       });
       }
@@ -146,10 +162,17 @@ import moment from 'moment'
          return moment(time, "YYYYMMDD").fromNow(); 
         //  moment(time).format("DD/MM/YYYY")
        },
-        getuser()
+       
+        registeredTime(time)
+       { 
+       return  moment(time).format("YYYY-MM-DD") 
+       },
+       
+        getuser(page = 1)
         {
-         this.$http.get(`${this.$baseApi}/user`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
-               this.users=response.data.user
+         this.$http.get(`${this.$baseApi}/user?page=`+page,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
+               this.users=response.data.user.data 
+               this.paginate=response.data.user
          }) 
         }
     },
