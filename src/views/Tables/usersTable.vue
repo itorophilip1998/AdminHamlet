@@ -1,18 +1,18 @@
 <template>
   <div class="card shadow"
        :class="type === 'dark' ? 'bg-default': ''">
-    <div class="card-header border-0"
+    <div class="card-header border-0 pb-0 "
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row align-items-center">
-        <div class="col">
+        <div class="col-lg-4 col-6">
           <h3 class="mb-0 " :class="type === 'dark' ? 'text-white': ''">
           <input type="text" v-model="search" placeholder="search by All the fields" class="form-control shadow pr-5">
           <i class="fas fa-search   text-muted "></i>
           </h3>
         </div>
-        <div class="col text-right">
+        <!-- <div class="col text-right">
           <base-button type="primary" size="sm">See all </base-button>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -96,17 +96,18 @@
           </th>
 
         </template>
-
+ 
       </base-table>
-    </div>
-
-    <div class="card-footer d-flex justify-content-end"
+       <div class="card-footer d-flex justify-content-start "
          :class="type === 'dark' ? 'bg-transparent': ''"> 
       <!-- <base-pagination total="4"></base-pagination> -->
 
       <pagination :data="paginate" @pagination-change-page="getuser"></pagination>
 
     </div>
+    </div>
+
+  
 
   </div>
 </template>
