@@ -27,6 +27,7 @@
           <th>Email</th>
           <th>Number of Employees</th>
           <th>companies</th>
+          <th>Banned Status</th> 
           <th>Registered</th>
           <th>Actions</th>
         </template>
@@ -61,6 +62,14 @@
           </th>
 
           <th @click="link(row.email)" style="cursor: pointer;">
+               <div v-if="row.banned_at" class="alert alert-danger p-0 text-center" role="alert">
+                      Banned
+               </div>
+               <div  v-if="!row.banned_at" class="alert  p-0 text-center" role="alert">
+                     Active
+               </div>
+          </th>
+          <th @click="link(row.email)" style="cursor: pointer;">
             <div class=" align-items-center">
               <span class="completion mr-2">{{registeredOn(row.created_at)}}</span> <br>
               <small class="">{{registeredTime(row.created_at)}}</small>
@@ -77,8 +86,9 @@
               </a>
 
               <template>
-                <router-link class="dropdown-item text-primary" :to="`/user/${row.email}`">View User <i class="fa fa-eye float-right" aria-hidden="true"></i></router-link>
-                <a class="dropdown-item text-danger" href="#">Barn User <i class="fas float-right fa-hand-paper"></i></a>
+                <router-link class="dropdown-item text-primary" :to="`/user/${row.email}`">View User <i class="fa fa-eye float-right" aria-hidden="true"></i></router-link> 
+                <a class="dropdown-item text-danger" v-if="!row.banned_at" @click="banUser(row)">Ban User<i class="fas float-right fa-hand-paper"></i></a>
+                <a class="dropdown-item text-danger" v-if="row.banned_at" @click="unbanUser(row.id)">Unban User<i class="fas float-right fa-hand-holding-heart"></i></a> 
                 <a class="dropdown-item text-info" href="#">Chat with User <i class="fa fa-comments float-right" aria-hidden="true"></i></a> 
             
               </template>
@@ -152,6 +162,20 @@ import pagination from 'laravel-vue-pagination'
       }
      },
     methods: {
+      banUser(user)
+      { 
+        this.$http.post(`${this.$rootApi}/auth/userBan`,user).then((response)=> {
+               this.users=response.data.user.data  
+         }) 
+         this.getuser();
+      },
+      unbanUser(id)
+      { 
+        this.$http.get(`${this.$rootApi}/auth/userRevoke/${id}`).then((response)=> {
+               this.users=response.data.user.data  
+         }) 
+         this.getuser();
+      },
      
     link(email)
     {
@@ -159,7 +183,7 @@ import pagination from 'laravel-vue-pagination'
     }, 
         registeredOn(time)
        {
-         return moment(time, "YYYYMMDD").fromNow(); 
+         return moment(time).fromNow(); 
         //  moment(time).format("DD/MM/YYYY")
        },
        
@@ -170,7 +194,7 @@ import pagination from 'laravel-vue-pagination'
        
         getuser(page = 1)
         {
-         this.$http.get(`${this.$baseApi}/user?page=`+page,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
+         this.$http.get(`${this.$baseApi}/users?page=`+page,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
                this.users=response.data.user.data 
                this.paginate=response.data.user
          }) 

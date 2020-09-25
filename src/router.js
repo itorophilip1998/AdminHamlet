@@ -71,9 +71,9 @@ const router =new Router({
 
         },
         {
-          path: '/feedback',
-          name: 'feedback',
-          component: () => import(/* webpackChunkName: "demo" */ './views/feedback.vue'),
+          path: '/contactus',
+          name: 'contact us',
+          component: () => import(/* webpackChunkName: "demo" */ './views/contactus.vue'),
           meta: { 
             requiresAuth: true
           }

@@ -3,7 +3,7 @@
            <base-header type="gradient-primary" class="pb-4 pb-8 pt-5 pt-md-8">  
             
         </base-header>
-
+<!-- {{ profile }} -->  
         <div class="container-fluid mt--7">
             <div class="row">
                 <div class="col-md-10 m-auto mt-   mb-5 mb-xl-0">
@@ -85,7 +85,8 @@
           country: '',
           zipCode: '',
           about: '',
-        }
+        },
+        profile:{}
       }
     },
     created() {
@@ -96,9 +97,8 @@
         getProfile()
         {
          this.$http.get(`${this.$baseApi}/user/${this.params}`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
-               console.log(response)
-         })
-
+               this.profile=response.data.user 
+         }) 
         }
     },
   };

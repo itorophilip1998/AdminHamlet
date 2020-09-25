@@ -17,7 +17,7 @@
         <sidebar-item :link="{name: 'Users', icon: 'fa fa-users text-blue', path: '/users'}"/>
         <sidebar-item :link="{name: 'Companies', icon: 'ni ni-briefcase-24 text-blue', path: '/companies'}"/>
         <sidebar-item :link="{name: 'Chats', icon: 'fas fa-comments   text-blue', path: '/chats'}"/> 
-        <sidebar-item :link="{name: 'Feedback', icon: ' ni ni-notification-70 text-blue', path: '/feedback'}"/>
+        <sidebar-item :link="{name: 'Contact us', icon: ' ni ni-notification-70 text-blue', path: '/contactus'}"/>
         <sidebar-item :link="{name: 'Admin Profile', icon: 'ni ni-single-02 text-blue', path: '/profile'}"/>
          
         <!-- <sidebar-item :link="{name: 'Maps', icon: 'ni ni-pin-3 text-orange', path: '/maps'}"/> -->

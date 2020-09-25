@@ -57,7 +57,7 @@
                         </router-link>
                         <router-link to="/feedback" class="dropdown-item">
                             <i class=" ni ni-notification-70"></i>
-                            <span>Feedback</span>
+                            <span>Contact us</span>
                         </router-link>
                         <div class="dropdown-divider"></div>
                         <button  @click="logout()" class="dropdown-item btn">
