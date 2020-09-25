@@ -51,6 +51,10 @@
                             <i class="fa fa-users"></i>
                             <span>Users</span>
                         </router-link>
+                         <router-link to="/companies" class="dropdown-item">
+                            <i class="fas fa-briefcase    "></i>
+                            <span>Companies</span>
+                        </router-link>
                         <router-link to="/chats" class="dropdown-item">
                             <i class="fas fa-comments"></i>
                             <span>Chats</span>
@@ -59,6 +63,7 @@
                             <i class=" ni ni-notification-70"></i>
                             <span>Contact us</span>
                         </router-link>
+                       
                         <div class="dropdown-divider"></div>
                         <button  @click="logout()" class="dropdown-item btn">
                             <i class="ni ni-user-run"></i>

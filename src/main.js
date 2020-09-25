@@ -5,7 +5,7 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'  
 import FlashMessage from '@smartweb/vue-flash-message'; 
-Vue.use(FlashMessage);
+Vue.use(FlashMessage); 
 import ArgonDashboard from './plugins/argon-dashboard'
 import axios from 'axios' 
 Vue.prototype.$http = axios 

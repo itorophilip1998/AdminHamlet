@@ -59,6 +59,14 @@ const router =new Router({
           meta: { 
             requiresAuth: true
           }
+        },
+        {
+          path: '/company/:email',
+          name: 'company',
+          component: () => import(/* webpackChunkName: "demo" */ './views/company.vue'),
+          meta: { 
+            requiresAuth: true
+          }
 
         },
         {

@@ -10,9 +10,9 @@
           <i class="fas fa-search   text-muted "></i>
           </h3>
         </div>
-        <!-- <div class="col text-right">
-          <base-button type="primary" size="sm">See all </base-button>
-        </div> -->
+        <div class="col text-right">
+          <base-button type="primary" size="sm">{{ length }} Users</base-button>
+        </div>
       </div>
     </div>
 
@@ -25,7 +25,8 @@
         <template slot="columns">
           <th>Users</th>
           <th>Email</th>
-          <th>Number of Employees</th>
+          <th>Address</th>
+          <th>Phone</th>
           <th>companies</th>
           <th>Banned Status</th> 
           <th>Registered</th>
@@ -45,9 +46,18 @@
           <th  @click="link(row.email)" style="cursor: pointer;">
             {{row.email}}
           </th>
+           
+          <th  @dblclick="link(row.email)" style="cursor: pointer;">
+            <badge class="badge-dot mr-4" > 
+              <!-- <span class="status">{{ row.profile.address}}</span> -->
+             <truncate clamp="....."  action-class="text-primary font-weight-bold" :length="20" less="....." :text="row.profile.address"></truncate> 
+
+            </badge>
+          </th>
           <th @click="link(row.email)" style="cursor: pointer;">
             <badge class="badge-dot mr-4" > 
-              <span class="status">{{(row.employees.length >= 0) ? "No employee" : row.employees.length}}</span>
+              <span class="status">{{ row.profile.phone}}</span>
+              
             </badge>
           </th>
           <th @click="link(row.email)" style="cursor: pointer;">
@@ -113,10 +123,13 @@
 </template>
 <script>
 import moment from 'moment'
+import truncate from 'vue-truncate-collapsed'; 
+
 import pagination from 'laravel-vue-pagination'
   export default {
     components:{
-      pagination
+      pagination,
+      truncate
     },
     name: 'projects-table',
     props: {
@@ -129,6 +142,7 @@ import pagination from 'laravel-vue-pagination'
       return {
         users:[],
         search:'',
+        length:'',
         paginate:[]
        }
     },
@@ -166,14 +180,19 @@ import pagination from 'laravel-vue-pagination'
       banUser(user)
       { 
         this.$http.post(`${this.$rootApi}/auth/userBan`,user).then((response)=> {
-               this.users=response.data.user.data  
+                        this.getuser();
+                        console.log(response)
+
          }) 
          this.getuser();
       },
       unbanUser(id)
       { 
         this.$http.get(`${this.$rootApi}/auth/userRevoke/${id}`).then((response)=> {
-               this.users=response.data.user.data  
+                       this.getuser();
+                        console.log(response)
+
+
          }) 
          this.getuser();
       },
@@ -198,6 +217,7 @@ import pagination from 'laravel-vue-pagination'
          this.$http.get(`${this.$baseApi}/users?page=`+page,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
                this.users=response.data.user.data 
                this.paginate=response.data.user
+               this.length=response.data.user.total
          }) 
         }
     },
