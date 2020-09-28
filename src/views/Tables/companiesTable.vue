@@ -11,7 +11,7 @@
           </h3>
         </div>
         <div class="col text-right">
-          <base-button type="primary" size="sm">{{ length }} Users</base-button>
+          <base-button type="primary" size="sm">{{ length }} Companies</base-button>
         </div>
       </div>
     </div>
@@ -23,63 +23,76 @@
                   tbody-classes="list"
                   :data="filteredAll">
         <template slot="columns">
-          <th>Users</th>
+          <th>Companies</th>
           <th>Email</th>
+          <!-- <th>Phone</th> -->
           <th>Address</th>
-          <th>Phone</th>
-          <th>companies</th>
-          <th>Banned Status</th> 
-          <th>Registered</th>
-          <th>Actions</th>
+          <!-- <th>Zip Code</th>
+          <th>State</th> 
+          <th>Website</th>  -->
+          <th>Manager</th> 
+          <th>Employees</th> 
+          <th>Departments</th> 
+          <th>Registered</th> 
+          <!-- <th>Actions</th> -->
         </template>
         <template   slot-scope="{row}"> 
-          <th @click="link(row.email)" style="cursor: pointer;" scope="row">
+          <th @click="link(row.company_email)" style="cursor: pointer;" scope="row">
             <div class="media align-items-center">
               <a href="#" class="avatar rounded-circle mr-3">
-                <img v-if="row.profile" class="w-100 h-100"   :src="row.profile.profile_pic">
+                <img v-if="row.company_logo" class="w-100 h-100"   :src="row.company_logo">
               </a>
               <div class="media-body">
-                <span class="name mb-0 text-sm">{{row.username}}</span>
+                <span class="name mb-0 text-sm">{{row.company_email}}</span>
               </div>
             </div>
           </th>
-          <th  @click="link(row.email)" style="cursor: pointer;">
-            {{row.email}}
+          <th  @click="link(row.company_email)" style="cursor: pointer;">
+            {{row.company_email}}
           </th>
-           
-          <th  @dblclick="link(row.email)" style="cursor: pointer;">
-            <badge class="badge-dot mr-4" > 
-              <!-- <span class="status">{{ row.profile.address}}</span> -->
-             <truncate clamp="....."  action-class="text-primary font-weight-bold" :length="20" less="....." :text="row.profile.address"></truncate> 
+          <!-- <th  @click="link(row.company_email)" style="cursor: pointer;">
+            {{row.company_phone}}
+          </th>  -->
+            <th  @dblclick="link(row.company_email)" style="cursor: pointer;">
+            <badge class="badge-dot mr-4" >  
+             <truncate clamp="....."  action-class="text-primary font-weight-bold" :length="20" less="....." :text="row.company_address"></truncate> 
 
             </badge>
           </th>
-          <th @click="link(row.email)" style="cursor: pointer;">
-            <badge class="badge-dot mr-4" > 
-              <span class="status">{{ row.profile.phone}}</span>
-              
+            <!-- <th  @dblclick="link(row.company_email)" style="cursor: pointer;">
+            <badge class="badge-dot mr-4" >  
+             <truncate clamp="....."  action-class="text-primary font-weight-bold" :length="20" less="....." :text="row.zip_code"></truncate> 
+
             </badge>
           </th>
-          <th @click="link(row.email)" style="cursor: pointer;">
+           <th  @click="link(row.company_email)" style="cursor: pointer;">
+            {{row.state}}
+          </th> 
+           <th  @click="link(row.company_email)" style="cursor: pointer;">
+            {{row.company_website}}
+          </th>  -->
+           <th @click="link(row.company_name)" style="cursor: pointer;">
             <div class="text-center avatar-group">
-              <a v-if="row.company && row.company.company_logo" href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
-                <img   class="w-100 h-100" :src="row.company.company_logo">
+              <a v-if="row.user.profile && row.user.profile.profile_pic" href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
+                <img   class="w-100 h-100" :src="row.user.profile.profile_pic">
               </a> <br>
-                   <span class=""> {{(row.company) ? row.company.company_name: "No company Registered"}}  </span>
+                   <span class=""> {{ row.user.username}}  </span>
 
             </div>
             
           </th>
 
-          <th @click="link(row.email)" style="cursor: pointer;">
-               <div v-if="row.banned_at" class="alert alert-danger p-0 text-center" role="alert">
-                      Banned
-               </div>
-               <div  v-if="!row.banned_at" class="alert  p-0 text-center" role="alert">
-                     Active
-               </div>
+          <th class="text-center" @click="link(row.company_email)" style="cursor: pointer;">
+            <badge class="badge-dot mr-4" > 
+              <span class="status">{{(row.employees.length) ?  row.employees.length : "No employee" }}</span>
+            </badge>
           </th>
-          <th @click="link(row.email)" style="cursor: pointer;">
+          <th class="text-center" @click="link(row.company_email)" style="cursor: pointer;">
+            <badge class="badge-dot mr-4" > 
+              <span class="status">{{(row.company_departments.length) ?  row.company_departments.length : "No Department" }}</span>
+            </badge>
+          </th> 
+          <th @click="link(row.company_email  )" style="cursor: pointer;">
             <div class=" align-items-center">
               <span class="completion mr-2">{{registeredOn(row.created_at)}}</span> <br>
               <small class="">{{registeredTime(row.created_at)}}</small>
@@ -88,7 +101,7 @@
             </div>
           </th>
 
-          <th class="text-right">
+          <th class="text-right d-none">
             <base-dropdown class="dropdown"
                            position="right">
               <a slot="title" class="btn btn-sm btn-icon-only text-light" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -109,10 +122,8 @@
  
       </base-table>
        <div class="card-footer d-flex justify-content-start "
-         :class="type === 'dark' ? 'bg-transparent': ''"> 
-      <!-- <base-pagination total="4"></base-pagination> -->
-
-      <pagination :data="paginate" @pagination-change-page="getuser"></pagination>
+         :class="type === 'dark' ? 'bg-transparent': ''">  
+      <pagination :data="paginate" @pagination-change-page="getCompanies"></pagination>
 
     </div>
     </div>
@@ -123,15 +134,15 @@
 </template>
 <script>
 import moment from 'moment'
+import pagination from 'laravel-vue-pagination'
 import truncate from 'vue-truncate-collapsed'; 
 
-import pagination from 'laravel-vue-pagination'
   export default {
     components:{
       pagination,
       truncate
     },
-    name: 'users-table',
+    name: 'projects-table',
     props: {
       type: {
         type: String
@@ -140,33 +151,51 @@ import pagination from 'laravel-vue-pagination'
     },
     data() {
       return {
-        users:[],
+        company:[],
         search:'',
         length:'',
         paginate:[]
        }
     },
     mounted() {
-        this.getuser();  
+        this.getCompanies();  
     },
     computed: {
       filteredAll()
       {  
-        return this.users
+        return this.company
         .filter((post) => {
         return (
-          post.username
+          post.company_name
             .toLowerCase()
             .match(
               this.search.toLowerCase() || this.search.toUpperCase()
             ) ||
-          post.email
+          post.company_email
             .toLowerCase()
             .match(
               this.search.toLowerCase() || this.search.toUpperCase()
             )
             ||
-          post.company.company_name
+          post.no_of_employees
+            .toLowerCase()
+            .match(
+              this.search.toLowerCase() || this.search.toUpperCase()
+            ) 
+            ||
+          post.user.username
+            .toLowerCase()
+            .match(
+              this.search.toLowerCase() || this.search.toUpperCase()
+            ) 
+            ||
+          post.company_address
+            .toLowerCase()
+            .match(
+              this.search.toLowerCase() || this.search.toUpperCase()
+            ) 
+            ||
+          post.state
             .toLowerCase()
             .match(
               this.search.toLowerCase() || this.search.toUpperCase()
@@ -177,29 +206,11 @@ import pagination from 'laravel-vue-pagination'
       }
      },
     methods: {
-      banUser(user)
-      { 
-        this.$http.post(`${this.$rootApi}/auth/userBan`,user).then((response)=> {
-                        this.getuser();
-                        console.log(response)
-
-         }) 
-         this.getuser();
-      },
-      unbanUser(id)
-      { 
-        this.$http.get(`${this.$rootApi}/auth/userRevoke/${id}`).then((response)=> {
-                       this.getuser();
-                        console.log(response)
-
-
-         }) 
-         this.getuser();
-      },
+     
      
     link(email)
     {
-       this.$router.push(`/user/${email}`)
+       this.$router.push(`/company/${email}`)
     }, 
         registeredOn(time)
        {
@@ -212,12 +223,12 @@ import pagination from 'laravel-vue-pagination'
        return  moment(time).format("YYYY-MM-DD") 
        },
        
-        getuser(page = 1)
+        getCompanies(page = 1)
         {
-         this.$http.get(`${this.$baseApi}/users?page=`+page,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
-               this.users=response.data.user.data 
-               this.paginate=response.data.user
-               this.length=response.data.user.total
+         this.$http.get(`${this.$baseApi}/company?page=`+page,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
+               this.company=response.data.company.data 
+               this.paginate=response.data.company
+               this.length=response.data.company.total
          }) 
         }
     },

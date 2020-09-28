@@ -15,7 +15,7 @@
          <hr class="p-0 m-0">
 
                 <ul class="nav align-items-center d-md-none">
-                    <base-dropdown class="nav-item" position="right">
+                    <base-dropdown class="nav-item d-none" position="right">
                         <a slot="title" class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <i class="ni ni-bell-55"></i>
@@ -29,8 +29,9 @@
                     <base-dropdown class="nav-item" position="right">
                         <a slot="title" class="nav-link" href="#" role="button">
                             <div class="media align-items-center">
-                              <span class="avatar avatar-sm rounded-circle">
-                                <img alt="Image placeholder" src="img/theme/team-1-800x800.jpg">
+                              <span style="font-size:20px" class="">
+                                <!-- <img alt="Image placeholder" src="img/theme/team-1-800x800.jpg"> -->
+                                <i class="fas fa-bars    "></i>
                               </span>
                             </div>
                         </a>
