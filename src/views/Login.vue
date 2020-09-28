@@ -62,9 +62,7 @@
                  
                     <div class="card-body px-lg-5 px-0 py-lg-5">
                         <div class="text-center  mb-4">
-                            <h1 class="text-primary d-none d-md-block">Sign in</h1>
-                            <h1 class="text-primary d-block d-md-none">Welcome Back!</h1>
-                            <hr class="m-1 p-0">
+                            <h1 class="text-primary d-none d-md-block">Welcome Back!</h1>
                         </div>
                         <!-- Unautorized -->
                         <div v-if="Error401" class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -118,16 +116,14 @@
                 </div>
                 
             </div>
-            <div class="col-12  text-center shadow border  p-3 py-5 shadow" style="background: whitesmoke;">
+            <div class="col-12  text-center shadow border py-5 shadow" style="background: whitesmoke;">
               <a href="https://hamlethr.netlify.app" class="text-muted"><span class="text-primary d-block"><b>Hamlet</b></span> Copyright © 2020 Hamlet. All Rights Reserved</a>
             </div>
         </div>
   </div>
   <div class="col-md-6 d-none d-md-block bg-image w-100">
-    <div class="overlay ">
-       <h1 class="welcomeTxt text-center py-3 mt-5"><i class="fa fa-user" aria-hidden="true"></i> Welcome Back! 
-       </h1> 
-       
+    <div class="overlay ">  
+    <h1 class="d-none">sleep</h1> 
     </div>
   </div>
 </div> 

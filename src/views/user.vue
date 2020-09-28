@@ -11,7 +11,7 @@
                     <div class="card card-profile shadow">
                         <div class="row justify-content-center">
                             <div class="col-lg-3 order-lg-2">
-                                <div class="card-profile-image" style="margin-top:-1.5rem"> <a href="#"> <img :src="this.profile.profile.profile_pic" class="rounded-circle"> </a> </div>
+                                <div class="card-profile-image" style="margin-top:-1.5rem"> <a href="#"> <img :src="this.profile.profile.profile_pic" class="rounded-circle" height="150rem" width="150rem"> </a> </div>
                             </div>
                         </div>
                         <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
