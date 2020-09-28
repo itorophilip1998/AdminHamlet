@@ -79,7 +79,7 @@
 {
     background-image: url(../images/bg3.jpg);
     background-size: cover;
-    height: 100vh;
+    height: auto;
     width:100%;
     position: relative; 
     padding: 0 !important;
@@ -88,7 +88,7 @@
 .overlay
 {
     background-color: rgba(0,0,0,0.7);  
-    height: 73vh;
+    height: 100%;
     width:100%;
     position: relative; 
 }
@@ -110,7 +110,6 @@
 {
     color:rgba(218, 216, 216, 0.966);
     font-size: 30px; 
-    margin-top: 30% !important;
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
 
 }  
