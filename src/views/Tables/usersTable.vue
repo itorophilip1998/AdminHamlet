@@ -32,7 +32,7 @@
           <th>Registered</th>
           <th>Actions</th>
         </template>
-        <template   slot-scope="{row}"> 
+        <template   slot-scope="{row}" > 
           <th @click="link(row.email)" style="cursor: pointer;" scope="row">
             <div class="media align-items-center">
               <a href="#" class="avatar rounded-circle mr-3">
@@ -143,7 +143,8 @@ import pagination from 'laravel-vue-pagination'
         users:[],
         search:'',
         length:'',
-        paginate:[]
+        paginate:[],
+        comment:"user was banned"
        }
     },
     mounted() {
@@ -179,7 +180,11 @@ import pagination from 'laravel-vue-pagination'
     methods: {
       banUser(user)
       { 
-        this.$http.post(`${this.$rootApi}/auth/userBan`,user).then((response)=> {
+        const data = {
+          "id":user.id,
+          "comment":this.comment,
+        }
+        this.$http.post(`${this.$rootApi}/auth/userBan`,data).then((response)=> {
                         this.getuser();
                         console.log(response)
 

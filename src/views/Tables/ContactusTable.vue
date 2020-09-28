@@ -76,9 +76,9 @@
               </a>
 
               <template>
-                <a class="dropdown-item fa fa-eye text-primary" data-toggle="modal" data-target="#view"> View</a>
-                <a class="dropdown-item fa fa-comment text-success" @click="emailData=row.email" data-toggle="modal" data-target="#feedback"> Send FeedBack</a>
-                <a class="dropdown-item fas fa-trash-alt text-danger" href="#"> Delete</a>
+                <button class="dropdown-item fa fa-eye text-primary" data-toggle="modal" data-target="#view"> View</button>
+                <button class="dropdown-item fa fa-comment text-success" @click="emailData=row.email" data-toggle="modal" data-target="#feedback"> Send FeedBack</button>
+                <button class="dropdown-item fas fa-trash-alt text-danger" @click="deleteContact(row)"> Delete</button>
                 
               </template>
             </base-dropdown>
@@ -218,7 +218,6 @@ import moment from 'moment'
        { 
        return  moment(time).format("YYYY-MM-DD") 
        },
-       
         getAllContacts(page = 1)
         {
          this.$http.get(`${this.$baseApi}/contact?page=`+page,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
@@ -227,7 +226,14 @@ import moment from 'moment'
                this.length=response.data.contact.total
          }) 
         }
-    },
+       },
+        deleteContact(row)
+        {  
+         this.$http.post(`${this.$baseApi}/deleteContact/${row.id}`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
+            this.getAllContacts();
+               console.log(response)
+         }) 
+        } 
      
   }
   
