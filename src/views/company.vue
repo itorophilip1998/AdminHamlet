@@ -3,7 +3,7 @@
            <base-header type="gradient-primary" class="pb-4 pb-8 pt-5 pt-md-8">  
             
         </base-header>
-<!-- {{ profile }} -->  
+
         <div class="container-fluid mt--7">
             <div class="row">
                 <div class="col-md-10 m-auto mt-   mb-5 mb-xl-0">
@@ -11,54 +11,52 @@
                     <div class="card card-profile shadow">
                         <div class="row justify-content-center">
                             <div class="col-lg-3 order-lg-2">
-                                <div class="card-profile-image">
-                                    <a href="#">
-                                        <img src="img/theme/team-4-800x800.jpg" class="rounded-circle">
-                                    </a>
-                                </div>
+                                <div class="card-profile-image" style="margin-top:-1rem"> <a href="#"> <img :src="this.profile.company.company_logo" class="rounded-circle"> </a> </div>
                             </div>
                         </div>
                         <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                             <div class="d-flex justify-content-between">
-                                <base-button size="sm" type="info" class="mr-4">Connect,</base-button>
-                                <base-button size="sm" type="default" class="float-right">Message</base-button>
+                                <router-link to="/chats"><base-button size="sm" type="info" class="mr-4">Connect</base-button></router-link>
+                                <router-link to="/chats"><base-button size="sm" type="default" class="float-right">Message</base-button></router-link>
                             </div>
                         </div>
                         <div class="card-body pt-0 pt-md-4">
                             <div class="row">
                                 <div class="col">
-                                    <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                    <div class="card-profile-stats d-flex justify-content-center">
                                         <div>
-                                            <span class="heading">22</span>
-                                            <span class="description">Friends</span>
+                                            <span class="heading">{{(this.profile.employees.length) ?  this.profile.employees.length : "0" }}</span>
+                                            <span class="description">Employees</span>
                                         </div>
+                                        
                                         <div>
-                                            <span class="heading">10</span>
-                                            <span class="description">Photos</span>
-                                        </div>
-                                        <div>
-                                            <span class="heading">89</span>
-                                            <span class="description">Comments</span>
+                                            <span class="heading">{{(this.profile.company.company_departments.length) ?  this.profile.company.company_departments.length : "0" }}</span>
+                                            <span class="description">Departments</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="text-center">
                                 <h3>
-                                    Jessica Jones<span class="font-weight-light">, 27</span>
+                                    {{this.profile.company.company_name}}
                                 </h3>
                                 <div class="h5 font-weight-300">
-                                    <i class="ni location_pin mr-2"></i>Bucharest, Romania
+                                    <i class="ni location_pin mr-2"></i>{{this.profile.company.company_address}}, {{this.profile.company.city}}, {{this.profile.company.state}} 
                                 </div>
                                 <div class="h5 mt-4">
-                                    <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+                                    <i class="ni business_briefcase-24 mr-2"></i>{{this.profile.company.company_phone}}
+                                </div>
+                                <div class="h5 mt-4">
+                                    <i class="ni business_briefcase-24 mr-2"></i>{{this.profile.company.company_email}}
+                                </div>
+                                <div class="h5 mt-4">
+                                    <i class="ni business_briefcase-24 mr-2"></i>{{this.profile.company.company_website}}
                                 </div>
                                 <div>
-                                    <i class="ni education_hat mr-2"></i>University of Computer Science
+                                    <i class="ni education_hat mr-2"></i>{{this.profile.company.services}}
                                 </div>
                                 <hr class="my-4" />
-                                <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
-                                <a href="#">Show more</a>
+                                
                             </div>
                         </div>
                     </div>
