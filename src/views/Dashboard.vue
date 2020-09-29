@@ -1,6 +1,6 @@
 <template>
     <div>
-        <base-header type="gradient-primary" class="pb-5 pt-5 pt-md-8 "> 
+        <base-header type="gradient-primary" class="pb-5 pt-5 pt-md-8" style="height:85vh "> 
             <!-- Card stats -->
             <div class="row">
                 <div class="col-xl-4 col-lg-6">
@@ -8,7 +8,7 @@
                                 type="gradient-red"
                                 sub-title="350,897"
                                 icon="fa fa-users"
-                                class="mb-4 mb-xl-0"
+                                class="mb-4 mb-xl-0 pt-5 pb-5"
                     > 
                         <template slot="footer">
                             <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
@@ -21,7 +21,7 @@
                                 type="gradient-orange"
                                 sub-title="2,356"
                                 icon="ni ni-chart-pie-35"
-                                class="mb-4 mb-xl-0"
+                                class="mb-4 mb-xl-0 pt-5 pb-5"
                     >
 
                         <template slot="footer">
@@ -35,7 +35,7 @@
                                 type="gradient-info"
                                 sub-title="49,65%"
                                 icon="ni ni-chart-bar-32"
-                                class="mb-4 mb-xl-0"
+                                class="mb-4 mb-xl-0 pt-5 pb-5"
                     >
 
                         <template slot="footer">
@@ -45,11 +45,11 @@
                     </stats-card>
                 </div>
             </div> 
-          </base-header>
-        <base-header type="gradient-primary" class="  pb-5  pt-md-1"> 
+          <!-- </base-header>
+        <base-header type="gradient-primary" class="  pb-5  pt-md-1">  -->
         
             <!-- Card stats -->
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-xl-4 col-lg-6">
                     <stats-card title="Premuim Users"
                                 type="gradient-red"
@@ -93,11 +93,11 @@
                         </template>
                     </stats-card>
                 </div>
-            </div>
-        </base-header>
-        <base-header type="gradient-primary" class="pb-1 pb-4 pt-md-1"> 
+            </div> -->
+        <!-- </base-header>
+        <base-header type="gradient-primary" class="pb-1 pb-4 pt-md-1">  -->
         
-        <!-- Card stats -->
+        <!-- Card stats
         <div class="row">
             <div class="col-xl-4 col-lg-6">
                 <stats-card title="Companies with less than 100 Employees"
@@ -142,7 +142,7 @@
                     </template>
                 </stats-card>
             </div>
-        </div>
+        </div> -->
     </base-header>
 
         <!--Charts-->
