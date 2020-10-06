@@ -1,32 +1,67 @@
 <template>
     <div>
-        <base-header type="gradient-primary" class="pb-5 pt-5 pt-md-8 "> 
+        <base-header type="gradient-primary" class="pb-5 pt-5 pt-md-8 bg"> 
             <!-- Card stats -->
-            <div class="row">
+            <div class="grid">
+                <div class="one">
+                    <div class="grid2">
+                        <div>
+                            <h2>Active Users</h2>
+                            <h4>{{(this.activeUsers.length) ?  this.activeUsers.length : "0" }}</h4>
+                        </div>
+                        <div class="circle-name-1">
+                            <i class="fa fa-user-friends"></i>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="one">
+                <div class="grid2">
+                        <div>
+                            <h2>Banned Users</h2>
+                            <h4>{{(this.bannedUsers.length) ?  this.bannedUsers.length : "0" }}</h4>
+                        </div>
+                        <div class="circle-name-2">
+                            <i class="fa fa-user-times" ></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="one">
+                    <div class="grid2">
+                        <div>
+                            <h2>Total Users</h2>
+                            <h4>{{(this.users.length) ?  this.users.length : "0" }}</h4>
+                        </div>
+                        <div class="circle-name-3">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row">
+
                 <div class="col-xl-4 col-lg-6">
-                    <stats-card title="Banned Users"
+                    <stats-card title="Active Users"
                                 type="gradient-red"
-                                sub-title="350,897"
                                 icon="fa fa-users"
-                                class="mb-4 mb-xl-0"
+                                class="pt-5"
                     > 
                         <template slot="footer">
-                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                            <span class="text-nowrap">Since last month</span>
+                            <span class="heading"><h2>{{(this.activeUsers.length) ?  this.activeUsers.length : "0" }}</h2> </span>
                         </template>
                     </stats-card>
                 </div>
                 <div class="col-xl-4 col-lg-6">
-                    <stats-card title="Active Users "
+                    <stats-card title="Banned Users "
                                 type="gradient-orange"
-                                sub-title="2,356"
                                 icon="ni ni-chart-pie-35"
-                                class="mb-4 mb-xl-0"
+                                class="mb-4 mb-xl-0 pt-5 pb-5"
                     >
 
                         <template slot="footer">
-                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 12.1%</span>
-                            <span class="text-nowrap">Since last month</span>
+                            <span class="heading">{{(this.bannedUsers.length) ?  this.bannedUsers.length : "0" }}</span>
                         </template>
                     </stats-card>
                 </div>  
@@ -35,7 +70,7 @@
                                 type="gradient-info"
                                 sub-title="49,65%"
                                 icon="ni ni-chart-bar-32"
-                                class="mb-4 mb-xl-0"
+                                class="mb-4 mb-xl-0 pt-5 pb-5"
                     >
 
                         <template slot="footer">
@@ -44,12 +79,12 @@
                         </template>
                     </stats-card>
                 </div>
-            </div> 
-          </base-header>
-        <base-header type="gradient-primary" class="  pb-5  pt-md-1"> 
+            </div>  -->
+          <!-- </base-header>
+        <base-header type="gradient-primary" class="  pb-5  pt-md-1">  -->
         
             <!-- Card stats -->
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-xl-4 col-lg-6">
                     <stats-card title="Premuim Users"
                                 type="gradient-red"
@@ -93,11 +128,11 @@
                         </template>
                     </stats-card>
                 </div>
-            </div>
-        </base-header>
-        <base-header type="gradient-primary" class="pb-1 pb-4 pt-md-1"> 
+            </div> -->
+        <!-- </base-header>
+        <base-header type="gradient-primary" class="pb-1 pb-4 pt-md-1">  -->
         
-        <!-- Card stats -->
+        <!-- Card stats
         <div class="row">
             <div class="col-xl-4 col-lg-6">
                 <stats-card title="Companies with less than 100 Employees"
@@ -142,7 +177,7 @@
                     </template>
                 </stats-card>
             </div>
-        </div>
+        </div> -->
     </base-header>
 
         <!--Charts-->
@@ -224,16 +259,8 @@
     </div>
 </template>
 <script>
-  // Charts
-  // import * as chartConfigs from '@/components/Charts/config';
-  // import LineChart from '@/components/Charts/LineChart';
-  // import BarChart from '@/components/Charts/BarChart';
-
-  // Tables
-  // import SocialTrafficTable from './Dashboard/SocialTrafficTable';
-  // import PageVisitsTable from './Dashboard/PageVisitsTable';
-
-  export default {
+import axios from 'axios'
+export default {
     components: {
       // LineChart,
       // BarChart,
@@ -262,8 +289,17 @@
               data: [25, 20, 30, 22, 17, 29]
             }]
           }
-        }
+        },
+        activeUsers: {},
+        bannedUsers: {},
+        users:{}
       };
+    },
+     mounted() {
+      this.initBigChart(0);
+      this.getActive();
+      this.getBan();
+      this.getuser()
     },
     methods: {
       initBigChart(index) {
@@ -278,11 +314,118 @@
         };
         this.bigLineChart.chartData = chartData;
         this.bigLineChart.activeIndex = index;
-      }
+      },
+      getActive() {
+      axios.get("https://hamlet.payfill.co/api/admin/active/users", {headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}})
+        .then((res) => {
+          console.log(res.data.active_users);
+          this.activeUsers = res.data.active_users;
+        });
     },
-    mounted() {
-      this.initBigChart(0);
-    }
+    getBan() {
+      axios.get("https://hamlet.payfill.co/api/admin/ban/users", {headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}})
+        .then((res) => {
+          console.log(res.data.banned_users);
+          this.bannedUsers = res.data.banned_users;
+        });
+    },
+    getuser()
+        {
+         this.$http.get("https://hamlet.payfill.co/api/admin/allUsers",{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
+               this.users=response.data.user
+               console.log(this.users)
+         }) 
+        }
+    },
   };
 </script>
-<style></style>
+<style>
+    .grid{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap:2rem
+    }
+    .one{
+        background:white;
+        border-radius:5px;
+        padding: 30px 20px;
+        box-shadow: 4px 2px 7px rgba(0, 0, 0, 0.25);
+        transition: transform .2s !important;
+    }
+    .one:hover{
+        transform: scale(1.1) !important;
+    }
+    .grid2{
+        display:grid;
+        grid-template-columns:3fr 1fr;
+        grid-gap: 1rem;
+    }
+    .circle-name-1 {
+    padding: 1rem;
+    background-color: #64a2ff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #ffffff;
+    }
+    .circle-name-2 {
+    padding: 1rem;
+    background-color:red;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #ffffff;
+    }
+    .circle-name-3 {
+    padding: 1rem;
+    background:orange;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #ffffff;
+    }
+    .bg{
+        height:85vh;
+    }
+
+
+
+
+    @media(max-width:768px){
+        .grid{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap:3rem
+    }
+        .grid2{
+        display:grid;
+        grid-template-columns:3fr 1fr;
+        grid-gap: 1rem;
+    }
+        .bg{
+            height:auto;
+        }
+    }
+
+
+    @media (min-width:769px) and (max-width:1200px){
+        .grid{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap:3rem
+    }
+        .grid2{
+        display:grid;
+        grid-template-columns:3fr 1fr;
+        grid-gap: 1rem;
+    }
+        .bg{
+            height:auto;
+        }
+
+    }
+
+
+
+    
+</style>
