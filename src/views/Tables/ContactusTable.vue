@@ -76,15 +76,15 @@
               </a>
 
               <template>
-                <button class="dropdown-item fa fa-eye text-primary" data-toggle="modal" data-target="#view"> View</button>
-                <button class="dropdown-item fa fa-comment text-success" @click="emailData=row.email" data-toggle="modal" data-target="#feedback"> Send FeedBack</button>
+                <button class="dropdown-item fa fa-eye text-primary" data-toggle="modal" :data-target="`#view${row.id}`"> View</button>
+                <button class="dropdown-item fa fa-comment text-success" @click="emailData=row.email" data-toggle="modal" :data-target="`#feedback${row.id}`"> Send FeedBack</button>
                 <button class="dropdown-item fas fa-trash-alt text-danger" @click="deleteContact(row)"> Delete</button>
                 
               </template>
             </base-dropdown>
           </td>
           <!-- modal for View -->  
-          <div class="modal fade " id="view" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+          <div class="modal fade " :id="`view${row.id}`" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
             <div class="modal-dialog mt-5" role="document">
               <div class="modal-content ">
                 <div class="modal-header">
@@ -104,7 +104,7 @@
             </div>
           </div>
           <!-- modal for feedback -->  
-          <div class="modal fade" id="feedback" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+          <div class="modal fade" :id="`feedback${row.id}`" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content ">
                 <div class="modal-header">
@@ -225,16 +225,16 @@ import moment from 'moment'
                this.paginate=response.data.contact
                this.length=response.data.contact.total
          }) 
-        }
-       },
+        },
+     
         deleteContact(row)
         {  
-         this.$http.post(`${this.$baseApi}/deleteContact/${row.id}`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
+         this.$http.delete(`${this.$baseApi}/deleteContact/${row.id}`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
             this.getAllContacts();
                console.log(response)
          }) 
         } 
-     
+      },
   }
   
 </script>
