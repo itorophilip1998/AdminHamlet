@@ -72,9 +72,10 @@
           </th>
 
           <th @click="link(row.email)" style="cursor: pointer;">
-               <div v-if="row.banned_at" class="alert alert-danger p-0 text-center" role="alert">
+               <div v-if="row.banned_at" class="alert alert-danger p-0 mb-0 text-center" role="alert">
                       Banned
                </div>
+               <small v-if="row.banned_at">{{ registeredTime(row.banned_at) }}</small>
                <div  v-if="!row.banned_at" class="alert  p-0 text-center" role="alert">
                      Active
                </div>

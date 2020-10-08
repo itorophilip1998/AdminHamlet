@@ -56,7 +56,7 @@
                             <i class="fas fa-briefcase    "></i>
                             <span>Companies</span>
                         </router-link>
-                        <router-link to="/chats" class="dropdown-item clever">
+                        <router-link to="/chats" class="dropdown-item ">
                             <i class="fas fa-comments"></i>
                             <span>Chats</span>
                         </router-link>
