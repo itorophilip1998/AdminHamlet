@@ -2,8 +2,8 @@
     <div>
         <base-header type="gradient-primary" class="pb-5 pt-5 pt-md-8 bg"> 
             <!-- Card stats -->
-            <div class="grid">
-                <div class="one">
+            <div class="grid mb-5">
+                <router-link to="users"><div class="one">
                     <div class="grid2">
                         <div>
                             <h2>Active Users</h2>
@@ -15,8 +15,8 @@
                         
                     </div>
                     
-                </div>
-                <div class="one">
+                </div></router-link>
+                <router-link to="users"><div class="one">
                 <div class="grid2">
                         <div>
                             <h2>Banned Users</h2>
@@ -26,8 +26,8 @@
                             <i class="fa fa-user-times" ></i>
                         </div>
                     </div>
-                </div>
-                <div class="one">
+                </div></router-link>
+                <router-link to="users"><div class="one">
                     <div class="grid2">
                         <div>
                             <h2>Total Users</h2>
@@ -38,8 +38,45 @@
                         </div>
                         
                     </div>
-                </div>
+                </div></router-link>
+                <router-link to="companies"><div class="one">
+                    <div class="grid2">
+                        <div>
+                            <h2>Companies</h2>
+                            <h4>{{(length) ?  length : "0" }}</h4>
+                        </div>
+                        <div class="circle-name-1">
+                            <i class="fa fa-building"></i>
+                        </div>
+                        
+                    </div>
+                    
+                </div></router-link>
+                <router-link to="contactus"><div class="one">
+                <div class="grid2">
+                        <div>
+                            <h2>Messages</h2>
+                            <h4>{{(length1) ?  length1 : "0" }}</h4>
+                        </div>
+                        <div class="circle-name-4">
+                            <i class="fa fa-envelope-open-text" ></i>
+                        </div>
+                    </div>
+                </div></router-link>
+                <router-link to="chats"><div class="one">
+                    <div class="grid2">
+                        <div>
+                            <h2>Chats</h2>
+                            <h4>{{(this.chats.length) ?  this.chats.length : "0" }}</h4>
+                        </div>
+                        <div class="circle-name-3">
+                            <i class="fa fa-comments"></i>
+                        </div>
+                        
+                    </div>
+                </div></router-link>
             </div>
+             
             <!-- <div class="row">
 
                 <div class="col-xl-4 col-lg-6">
@@ -290,18 +327,49 @@ export default {
             }]
           }
         },
+        length:"",
+        length1:"",
+        chats:{},
+        messages:{},
+        company: {},
         activeUsers: {},
         bannedUsers: {},
-        users:{}
+        users:{},
       };
     },
      mounted() {
       this.initBigChart(0);
       this.getActive();
       this.getBan();
-      this.getuser()
+      this.getuser();
+      this.getCompanies();
+      this.getMessages();
+      this.getChats()
     },
     methods: {
+        getMessages() {
+      axios.get("https://hamlet.payfill.co/api/admin/contact", {headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}})
+        .then((response) => {
+          this.messages=response.data.contact.data
+          this.length1=response.data.contact.total
+          console.log(this.messages);
+          });
+    },
+    getChats() {
+      axios.get("https://hamlet.payfill.co/api/chat/view/5", {headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}})
+        .then((response) => {
+          this.chats=response.data
+          console.log(this.chats);
+          });
+    },
+        getCompanies()
+        {
+         this.$http.get(`${this.$baseApi}/company`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
+               this.company=response.data.company.data 
+               this.length=response.data.company.total
+               console.log(this.company)
+         }) 
+        },
       initBigChart(index) {
         let chartData = {
           datasets: [
@@ -337,7 +405,8 @@ export default {
          }) 
         }
     },
-  };
+    
+  }
 </script>
 <style>
     .grid{
@@ -379,6 +448,14 @@ export default {
     .circle-name-3 {
     padding: 1rem;
     background:orange;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #ffffff;
+    }
+    .circle-name-4 {
+    padding: 1rem;
+    background:green;
     width: 50px;
     height: 50px;
     border-radius: 50%;
