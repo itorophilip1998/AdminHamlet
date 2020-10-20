@@ -2,6 +2,12 @@
     <div>
         <base-header type="gradient-primary" class="pb-5 pt-5 pt-md-8 bg"> 
             <!-- Card stats -->
+            <div v-if="loader" class="text-center pt-9" id="overlay"> 
+                <div class="loading">
+                    <i style="z-index: 2;"  class="fas my-3  fa-spinner fa-5x text-white fa-pulse"></i>
+                </div>
+                                   
+            </div>
             <div class="grid mb-5">
                 <router-link to="activeusers"><div class="one">
                     <div class="grid2">
@@ -333,6 +339,7 @@ export default {
         length3:"",
         length4:"",
         chats:{},
+        loader:true,
         messages:{},
         company: {},
         activeUsers: {},
@@ -363,6 +370,7 @@ export default {
         .then((response) => {
           this.chats=response.data
           console.log(this.chats);
+          
           });
     },
         getCompanies()
@@ -392,6 +400,7 @@ export default {
           console.log(res.data.active_users);
           this.activeUsers = res.data.active_users.data;
           this.length2 = res.data.active_users.total;
+          this.loader=false;
         });
     },
     getBan() {

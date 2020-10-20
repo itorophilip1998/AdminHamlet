@@ -1,6 +1,12 @@
 <template>
   <div class="card shadow"
        :class="type === 'dark' ? 'bg-default': ''">
+       <div v-if="loader" class="text-center pt-9" id="overlay"> 
+        <div class="loading">
+          <i style="z-index: 2;"  class="fas my-3  fa-spinner fa-5x text-white fa-pulse"></i>
+        </div>
+                                   
+      </div>
     <div class="card-header border-0 pb-0 "
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row align-items-center">
@@ -154,6 +160,7 @@ import truncate from 'vue-truncate-collapsed';
         company:[],
         search:'',
         length:'',
+        loader:true,
         paginate:[]
        }
     },
@@ -229,6 +236,7 @@ import truncate from 'vue-truncate-collapsed';
                this.company=response.data.company.data 
                this.paginate=response.data.company
                this.length=response.data.company.total
+               this.loader = false
          }) 
         }
     },
