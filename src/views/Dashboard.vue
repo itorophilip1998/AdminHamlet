@@ -3,11 +3,11 @@
         <base-header type="gradient-primary" class="pb-5 pt-5 pt-md-8 bg"> 
             <!-- Card stats -->
             <div class="grid mb-5">
-                <router-link to="users"><div class="one">
+                <router-link to="activeusers"><div class="one">
                     <div class="grid2">
                         <div>
                             <h2>Active Users</h2>
-                            <h4>{{(this.activeUsers.length) ?  this.activeUsers.length : "0" }}</h4>
+                            <h4>{{(length2) ?  length2 : "0" }}</h4>
                         </div>
                         <div class="circle-name-1">
                             <i class="fa fa-user-friends"></i>
@@ -16,11 +16,11 @@
                     </div>
                     
                 </div></router-link>
-                <router-link to="users"><div class="one">
+                <router-link to="bannedUsers"><div class="one">
                 <div class="grid2">
                         <div>
                             <h2>Banned Users</h2>
-                            <h4>{{(this.bannedUsers.length) ?  this.bannedUsers.length : "0" }}</h4>
+                            <h4>{{(length3) ?  length3 : "0" }}</h4>
                         </div>
                         <div class="circle-name-2">
                             <i class="fa fa-user-times" ></i>
@@ -31,7 +31,7 @@
                     <div class="grid2">
                         <div>
                             <h2>Total Users</h2>
-                            <h4>{{(this.users.length) ?  this.users.length : "0" }}</h4>
+                            <h4>{{(length4) ?  length4 : "0" }}</h4>
                         </div>
                         <div class="circle-name-3">
                             <i class="fa fa-users"></i>
@@ -329,6 +329,9 @@ export default {
         },
         length:"",
         length1:"",
+        length2:"",
+        length3:"",
+        length4:"",
         chats:{},
         messages:{},
         company: {},
@@ -387,20 +390,23 @@ export default {
       axios.get("https://hamlet.payfill.co/api/admin/active/users", {headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}})
         .then((res) => {
           console.log(res.data.active_users);
-          this.activeUsers = res.data.active_users;
+          this.activeUsers = res.data.active_users.data;
+          this.length2 = res.data.active_users.total;
         });
     },
     getBan() {
       axios.get("https://hamlet.payfill.co/api/admin/ban/users", {headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}})
         .then((res) => {
           console.log(res.data.banned_users);
-          this.bannedUsers = res.data.banned_users;
+          this.bannedUsers = res.data.banned_users.data;
+          this.length3 = res.data.banned_users.total
         });
     },
     getuser()
         {
          this.$http.get("https://hamlet.payfill.co/api/admin/allUsers",{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
-               this.users=response.data.user
+               this.users=response.data.user.data;
+               this.length4 = response.data.user.total
                console.log(this.users)
          }) 
         }
