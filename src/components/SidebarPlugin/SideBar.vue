@@ -37,7 +37,7 @@
                         </a>
 
                         <div class=" dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Activities!</h6>
+                            <h6 class="text-overflow m-0">MENU</h6>
                         </div>
                         <router-link to="/profile" class="dropdown-item">
                             <i class="ni ni-single-02"></i>
@@ -50,7 +50,15 @@
                         </router-link>
                         <router-link to="/users" class="dropdown-item">
                             <i class="fa fa-users"></i>
-                            <span>Users</span>
+                            <span>All Users</span>
+                        </router-link>
+                        <router-link to="/activeusers" class="dropdown-item">
+                            <i class="fa fa-user-friends"></i>
+                            <span>Active Users</span>
+                        </router-link>
+                        <router-link to="/bannedUsers" class="dropdown-item">
+                            <i class="fa fa-user-times"></i>
+                            <span>Banned Users</span>
                         </router-link>
                          <router-link to="/companies" class="dropdown-item">
                             <i class="fas fa-briefcase    "></i>

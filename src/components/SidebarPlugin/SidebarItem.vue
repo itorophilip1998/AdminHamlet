@@ -54,3 +54,8 @@
     }
   };
 </script>
+<style scoped>
+  router-link:hover{
+    color:red !important;
+  }
+</style>
