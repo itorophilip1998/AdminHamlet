@@ -96,6 +96,24 @@ const router =new Router({
 
         },
         {
+          path: '/activeusers',
+          name: 'active users',
+          component: () => import(/* webpackChunkName: "demo" */ './views/activeusers.vue'),
+          meta: { 
+            requiresAuth: true
+          }
+
+        },
+        {
+          path: '/bannedUsers',
+          name: 'banned users',
+          component: () => import(/* webpackChunkName: "demo" */ './views/bannedUsers.vue'),
+          meta: { 
+            requiresAuth: true
+          }
+
+        },
+        {
           path: '/profile',
           name: 'profile',
           component: () => import(/* webpackChunkName: "demo" */ './views/UserProfile.vue'),

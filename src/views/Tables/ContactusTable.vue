@@ -1,6 +1,12 @@
 <template>
   <div class="card shadow"
        :class="type === 'dark' ? 'bg-default': ''">
+       <div v-if="loader" class="text-center pt-9" id="overlay"> 
+        <div class="loading">
+          <i style="z-index: 2;"  class="fas my-3  fa-spinner fa-5x text-white fa-pulse"></i>
+        </div>
+                                   
+      </div>
     <div class="card-header border-0  pb-0 "
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row align-items-center">
@@ -173,6 +179,7 @@ import moment from 'moment'
               paginate:{},
               search:'',
               length:'',
+              loader:true,
               emailData:''
              }
     
@@ -224,6 +231,7 @@ import moment from 'moment'
                this.contact=response.data.contact.data 
                this.paginate=response.data.contact
                this.length=response.data.contact.total
+               this.loader = false
          }) 
         },
      

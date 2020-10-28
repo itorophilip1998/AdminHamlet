@@ -2,12 +2,18 @@
     <div>
         <base-header type="gradient-primary" class="pb-5 pt-5 pt-md-8 bg"> 
             <!-- Card stats -->
-            <div class="grid">
-                <div class="one">
+            <div v-if="loader" class="text-center pt-9" id="overlay"> 
+                <div class="loading">
+                    <i style="z-index: 2;"  class="fas my-3  fa-spinner fa-5x text-white fa-pulse"></i>
+                </div>
+                                   
+            </div>
+            <div class="grid mb-5">
+                <router-link to="activeusers"><div class="one">
                     <div class="grid2">
                         <div>
                             <h2>Active Users</h2>
-                            <h4>{{(this.activeUsers.length) ?  this.activeUsers.length : "0" }}</h4>
+                            <h4>{{(length2) ?  length2 : "0" }}</h4>
                         </div>
                         <div class="circle-name-1">
                             <i class="fa fa-user-friends"></i>
@@ -15,31 +21,68 @@
                         
                     </div>
                     
-                </div>
-                <div class="one">
+                </div></router-link>
+                <router-link to="bannedUsers"><div class="one">
                 <div class="grid2">
                         <div>
                             <h2>Banned Users</h2>
-                            <h4>{{(this.bannedUsers.length) ?  this.bannedUsers.length : "0" }}</h4>
+                            <h4>{{(length3) ?  length3 : "0" }}</h4>
                         </div>
                         <div class="circle-name-2">
                             <i class="fa fa-user-times" ></i>
                         </div>
                     </div>
-                </div>
-                <div class="one">
+                </div></router-link>
+                <router-link to="users"><div class="one">
                     <div class="grid2">
                         <div>
                             <h2>Total Users</h2>
-                            <h4>{{(this.users.length) ?  this.users.length : "0" }}</h4>
+                            <h4>{{(length4) ?  length4 : "0" }}</h4>
                         </div>
                         <div class="circle-name-3">
                             <i class="fa fa-users"></i>
                         </div>
                         
                     </div>
-                </div>
+                </div></router-link>
+                <router-link to="companies"><div class="one">
+                    <div class="grid2">
+                        <div>
+                            <h2>Companies</h2>
+                            <h4>{{(length) ?  length : "0" }}</h4>
+                        </div>
+                        <div class="circle-name-1">
+                            <i class="fa fa-building"></i>
+                        </div>
+                        
+                    </div>
+                    
+                </div></router-link>
+                <router-link to="contactus"><div class="one">
+                <div class="grid2">
+                        <div>
+                            <h2>Messages</h2>
+                            <h4>{{(length1) ?  length1 : "0" }}</h4>
+                        </div>
+                        <div class="circle-name-4">
+                            <i class="fa fa-envelope-open-text" ></i>
+                        </div>
+                    </div>
+                </div></router-link>
+                <router-link to="chats"><div class="one">
+                    <div class="grid2">
+                        <div>
+                            <h2>Chats</h2>
+                            <h4>{{(this.chats.length) ?  this.chats.length : "0" }}</h4>
+                        </div>
+                        <div class="circle-name-3">
+                            <i class="fa fa-comments"></i>
+                        </div>
+                        
+                    </div>
+                </div></router-link>
             </div>
+             
             <!-- <div class="row">
 
                 <div class="col-xl-4 col-lg-6">
@@ -290,18 +333,54 @@ export default {
             }]
           }
         },
+        length:"",
+        length1:"",
+        length2:"",
+        length3:"",
+        length4:"",
+        chats:{},
+        loader:true,
+        messages:{},
+        company: {},
         activeUsers: {},
         bannedUsers: {},
-        users:{}
+        users:{},
       };
     },
      mounted() {
       this.initBigChart(0);
       this.getActive();
       this.getBan();
-      this.getuser()
+      this.getuser();
+      this.getCompanies();
+      this.getMessages();
+      this.getChats()
     },
     methods: {
+        getMessages() {
+      axios.get("https://hamlet.payfill.co/api/admin/contact", {headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}})
+        .then((response) => {
+          this.messages=response.data.contact.data
+          this.length1=response.data.contact.total
+          console.log(this.messages);
+          });
+    },
+    getChats() {
+      axios.get("https://hamlet.payfill.co/api/chat/view/5", {headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}})
+        .then((response) => {
+          this.chats=response.data
+          console.log(this.chats);
+          
+          });
+    },
+        getCompanies()
+        {
+         this.$http.get(`${this.$baseApi}/company`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
+               this.company=response.data.company.data 
+               this.length=response.data.company.total
+               console.log(this.company)
+         }) 
+        },
       initBigChart(index) {
         let chartData = {
           datasets: [
@@ -319,25 +398,30 @@ export default {
       axios.get("https://hamlet.payfill.co/api/admin/active/users", {headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}})
         .then((res) => {
           console.log(res.data.active_users);
-          this.activeUsers = res.data.active_users;
+          this.activeUsers = res.data.active_users.data;
+          this.length2 = res.data.active_users.total;
+          this.loader=false;
         });
     },
     getBan() {
       axios.get("https://hamlet.payfill.co/api/admin/ban/users", {headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}})
         .then((res) => {
           console.log(res.data.banned_users);
-          this.bannedUsers = res.data.banned_users;
+          this.bannedUsers = res.data.banned_users.data;
+          this.length3 = res.data.banned_users.total
         });
     },
     getuser()
         {
          this.$http.get("https://hamlet.payfill.co/api/admin/allUsers",{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
-               this.users=response.data.user
+               this.users=response.data.user.data;
+               this.length4 = response.data.user.total
                console.log(this.users)
          }) 
         }
     },
-  };
+    
+  }
 </script>
 <style>
     .grid{
@@ -379,6 +463,14 @@ export default {
     .circle-name-3 {
     padding: 1rem;
     background:orange;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #ffffff;
+    }
+    .circle-name-4 {
+    padding: 1rem;
+    background:green;
     width: 50px;
     height: 50px;
     border-radius: 50%;

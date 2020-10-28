@@ -1,6 +1,12 @@
 <template>
   <div class="card shadow"
        :class="type === 'dark' ? 'bg-default': ''">
+       <div v-if="loader" class="text-center pt-9" id="overlay"> 
+        <div class="loading">
+          <i style="z-index: 2;"  class="fas my-3  fa-spinner fa-5x text-white fa-pulse"></i>
+        </div>
+                                   
+      </div>
     <div class="card-header border-0 pb-0 "
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row align-items-center">
@@ -144,6 +150,7 @@ import pagination from 'laravel-vue-pagination'
         users:[],
         search:'',
         length:'',
+        loader:true,
         paginate:[],
         comment:"user was banned"
        }
@@ -224,6 +231,7 @@ import pagination from 'laravel-vue-pagination'
                this.users=response.data.user.data 
                this.paginate=response.data.user
                this.length=response.data.user.total
+               this.loader = false
          }) 
         }
     },
