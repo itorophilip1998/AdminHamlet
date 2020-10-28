@@ -135,8 +135,7 @@ import moment from 'moment'
       showChat()
       {
         this.$http.get(`${this.$rootApi}/chat/view/${this.user.id}`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
-               this.chats=response.data   
-               console.log(this.chats)
+               this.chats=response.data    
          }) 
       },
       getProfile()
