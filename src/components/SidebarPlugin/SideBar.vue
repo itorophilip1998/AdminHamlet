@@ -148,15 +148,13 @@
              this.$router.push("/login")  
         // this.$http.post(`https://hamlet.payfill.co/api/auth/logout`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
         //        console.log(response)
-        //  })
-     
-
+        //  })  
           // let token =localStorage.getItem(this.$token) 
           //  this.$http.post(`https://hamlet.payfill.co/api/auth/logout`, 
           //  {headers:{'Authorization':`Bearer ${token}`}}).then((response)=> {
           //   localStorage.removeItem(this.$token)
           //    this.$router.push("/login")  
-          //  })
+          //  }) 
       },
       closeSidebar() {
         this.$sidebar.displaySidebar(false)

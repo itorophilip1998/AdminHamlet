@@ -31,8 +31,8 @@
     <small v-if="chats" class="text-muted pl-2 float-right">( {{( chats.length > 1) ? chats.length+' Messages': (chats.length > 0) ? chats.length+' Message' : "No Message" }} ) </small>
           </div>
 <!-- Messages template -->
-<div v-if="!chats.length == 0" id="chat" class="chat  row container-fluid  px-sm-4 p-0" >   
-    <div class="me col-md-12 pr-0" v-for="(chat, index) in chats" :key="index" >
+<div v-if="!chats.length == 0" id="chat" class="chat  row  px-sm-3 px-md-4 p-0" >   
+    <div class="me col-md-12 pr-0 p-0" v-for="(chat, index) in chats" :key="index" >
       <div   :class="`${(profile.id==chat.user_id) ? 'float-right bg-primary text-white' : 'float-left  text-justify  bg-secondary border' }  mt-2 p-2 seechat    text-justify  shadow`">
                
            <truncate  collapsed-text-class="collapsed truncate" action-class="customClass font-weight-bold " clamp="...Show more" :length="300" less="...Hide some"
@@ -58,7 +58,8 @@
                           <div class="col-md-4 border-left p-0 d-none d-md-block">
                             <h2 class="shadow  p-2">All Users <i class="fas fa-users "></i> <small class="float-right">{{ `${users.length} users` }}</small></h2>
                                    <ul class=" desktopScroll"> 
-                                     <li   class="pt-2 px-2 py-2 desktopLink" v-for="(user, index) in users" @click="getChat(user)" :key="index">
+                                     <input v-model="search" type="text" class="form-control py-0 mb-2" placeholder="Search for a user">
+                                     <li   class="pt-2 px-2 py-2 desktopLink" v-for="(user, index) in filteredAll" @click="getChat(user)" :key="index">
                                       <img v-if="user.profile" class="rounded-circle border " style="width: 35px;height: 35px;" 
                                       :src="user.profile.profile_pic" alt="">
                                     <small class="text-dark pl-2">{{ user.username }}</small>
@@ -97,19 +98,48 @@ import moment from 'moment'
            },
            chats:{},
            profile:{},
+           search:''
       }
     },
     mounted() {
        this.getUser()
        this.showChat()
-       this.getProfile()
+       this.getProfile() 
+       this.getChatUser() 
+    },
+    computed: {
+      filteredAll()
+      {  
+        return this.users
+        .filter((post) => {
+        return (
+          post.username
+            .toLowerCase()
+            .match(
+              this.search.toLowerCase() || this.search.toUpperCase()
+            ) ||
+          post.email
+            .toLowerCase()
+            .match(
+              this.search.toLowerCase() || this.search.toUpperCase()
+            )
+            ||
+          post.company.company_name
+            .toLowerCase()
+            .match(
+              this.search.toLowerCase() || this.search.toUpperCase()
+            ) 
+           
+        );
+      });
+      }
     },
     methods: {
   time(time){
    return  moment(time).fromNow()
   },
       getUser(){
-        this.$http.get(`${this.$baseApi}/allUsers`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
+        this.$http.get(`${this.$baseApi}/chatUsers`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
                this.users=response.data.user   
          }) 
       }, 
@@ -122,6 +152,14 @@ import moment from 'moment'
          this.showChat() 
          this.chat.message=""
       }, 
+        getChatUser() {   
+        this.$http.get(`${this.$baseApi}/user/${this.email}`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
+               this.user=response.data.user 
+               this.chat.friends_id=response.data.user.id  
+               this.showChat()
+
+         }) 
+      },
       getChat(users) { 
         this.user=users;
         this.chat.friends_id=users.id 
@@ -167,6 +205,7 @@ import moment from 'moment'
    padding: 4px;
    z-index: 2px;
   }
+  
   .desktopLink{
     cursor: pointer;
   }
@@ -180,6 +219,9 @@ import moment from 'moment'
       overflow-x: none;  
 
   } 
+  .chat{ 
+    margin-right: 0px !important;
+  }
   .time{
       color:rgb(88, 86, 86)
   }
@@ -191,4 +233,28 @@ import moment from 'moment'
                 position: relative;
                 display:inline-block;
  }
+
+ 
+/* //  Custorm css */
+.desktopScroll:hover::-webkit-scrollbar
+{   
+    display: block;
+    width: 8px !important;
+}
+.chat:hover::-webkit-scrollbar
+{   
+   display: block;
+    width: 8px !important;
+}
+::-webkit-scrollbar-track
+{
+    background: whitesmoke;
+}
+ 
+::-webkit-scrollbar-thumb
+{
+ background: #5e72e4;
+  border-radius: 5px; 
+} 
+
 </style>

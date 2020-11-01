@@ -3,19 +3,20 @@
           <base-header type="gradient-primary" class="pt-4 pb-5  pt-md-8">  
             
           </base-header>
-        <div class="container-fluid mt--7 " >
+        <div class="container-fluid mt--7  " >
             <div class="row ">
-                    <div class="col-md-9 col-sm-10 rounded-lg p-0 m-auto bg-white">
+                    <div class="col-md-9 col-sm-10 shadow rounded-lg p-0 m-auto bg-white">
                             <h2 class="shadow  p-2">All Users <i class="fas fa-users "></i> <small class="float-right">{{ `${users.length} users` }}</small></h2>
-                                   <ul class=" desktopScroll"> 
-                                     <li   class="pt-2 px-2  pl-3 py-2 desktopLink" v-for="(user, index) in users" @click="getChat(user)" :key="index">
+                                   <ul class=" desktopScroll p-2"> 
+                                     <input v-model="search" type="text" class="form-control py-0 mb-2" placeholder="Search for a user">
+
+                                     <li   class="pt-2 px-2  pl-3 py-2 desktopLink" v-for="(user, index) in filteredAll" @click="getChat(user)" :key="index">
                                       <img v-if="user.profile" class="rounded-circle border " style="width: 50px;height: 50px;" 
                                       :src="user.profile.profile_pic" alt="">
                                     <h3 class="text-dark pl-2 d-inline">{{ user.username }}
                                     </h3>
                                       <small class="fa fa-circle float-right text-success"> </small> 
-                                     </li>
-                                   
+                                     </li> 
                                    </ul>
                           </div>
             </div>
@@ -41,11 +42,40 @@
              message:'',
              photo:'',
            },
-           chats:{}
+           chats:{},
+           search:''
+
       }
     },
     mounted() {
        this.getUser() 
+    },
+     computed: {
+      filteredAll()
+      {  
+        return this.users
+        .filter((post) => {
+        return (
+          post.username
+            .toLowerCase()
+            .match(
+              this.search.toLowerCase() || this.search.toUpperCase()
+            ) ||
+          post.email
+            .toLowerCase()
+            .match(
+              this.search.toLowerCase() || this.search.toUpperCase()
+            )
+            ||
+          post.company.company_name
+            .toLowerCase()
+            .match(
+              this.search.toLowerCase() || this.search.toUpperCase()
+            ) 
+           
+        );
+      });
+      }
     },
     methods: {
       getUser(){
