@@ -6,6 +6,7 @@
         <div class="container-fluid mt--7  " >
             <div class="row ">
                     <div class="col-md-9 col-sm-10 shadow rounded-lg p-0 m-auto bg-white">
+                        
                             <h2 class="shadow  p-2">All Users <i class="fas fa-users "></i> <small class="float-right">{{ `${users.length} users` }}</small></h2>
                                    <ul class=" desktopScroll p-2"> 
                                      <input v-model="search" type="text" class="form-control py-0 mb-2" placeholder="Search for a user">
@@ -54,34 +55,33 @@
       filteredAll()
       {  
         return this.users
-        .filter((post) => {
-        return (
-          post.username
-            .toLowerCase()
-            .match(
-              this.search.toLowerCase() || this.search.toUpperCase()
-            ) ||
-          post.email
-            .toLowerCase()
-            .match(
-              this.search.toLowerCase() || this.search.toUpperCase()
-            )
-            ||
-          post.company.company_name
-            .toLowerCase()
-            .match(
-              this.search.toLowerCase() || this.search.toUpperCase()
-            ) 
+      //   .filter((post) => {
+      //   return (
+      //     post.username
+      //       .toLowerCase()
+      //       .match(
+      //         this.search.toLowerCase() || this.search.toUpperCase()
+      //       ) ||
+      //     post.email
+      //       .toLowerCase()
+      //       .match(
+      //         this.search.toLowerCase() || this.search.toUpperCase()
+      //       )
+      //       ||
+      //     post.company.company_name
+      //       .toLowerCase()
+      //       .match(
+      //         this.search.toLowerCase() || this.search.toUpperCase()
+      //       ) 
            
-        );
-      });
+      //   );
+      // });
       }
     },
     methods: {
       getUser(){
         this.$http.get(`${this.$baseApi}/chatUsers`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
-               this.users=response.data.user.data
-               console.log(this.users)
+               this.users=response.data.user 
          }) 
       }, 
       postChat(){  
@@ -91,8 +91,7 @@
          this.showChat()
       }, 
       getChat(users) {  
-        this.$router.push(`/chat/${users.email}`)  
-       
+        this.$router.push(`/chat/${users.email}`)   
       },
     }
   };

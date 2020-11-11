@@ -56,6 +56,7 @@
 </div>
                           </div>
                           <div class="col-md-4 border-left p-0 d-none d-md-block">
+                          
                             <h2 class="shadow  p-2">All Users <i class="fas fa-users "></i> <small class="float-right">{{ `${users.length} users` }}</small></h2>
                                    <ul class=" desktopScroll"> 
                                      <input v-model="search" type="text" class="form-control py-0 mb-2" placeholder="Search for a user">
