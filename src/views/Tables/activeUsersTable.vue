@@ -34,7 +34,7 @@
           <th>Address</th>
           <th>Phone</th>
           <th>companies</th>
-          <th>Banned Status</th> 
+          <th>Status</th> 
           <th>Registered</th>
           <th>Actions</th>
         </template>

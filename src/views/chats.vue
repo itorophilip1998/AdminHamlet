@@ -79,7 +79,7 @@
     },
     methods: {
       getUser(){
-        this.$http.get(`${this.$baseApi}/allUsers`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
+        this.$http.get(`${this.$baseApi}/chatUsers`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
                this.users=response.data.user.data
                console.log(this.users)
          }) 
