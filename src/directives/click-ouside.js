@@ -6,7 +6,8 @@ export default {
         // and if it did, call method provided in attribute value
         vnode.context[binding.expression](event);
       }
-    };
+    };  
+    
     document.body.addEventListener("click", el.clickOutsideEvent);
   },
   unbind: function(el) {
