@@ -4,6 +4,12 @@
             
           </base-header>
         <div class="container-fluid mt--7  " >
+        <div v-if="loader" class="text-center pt-9" id="overlay"> 
+        <div class="loading">
+          <i style="z-index: 2;"  class="fas my-3  fa-spinner fa-5x text-white fa-pulse"></i>
+        </div>
+                                   
+      </div>
             <div class="row ">
                     <div class="col-md-9 col-sm-10 shadow rounded-lg p-0 m-auto bg-white">
                         
@@ -44,7 +50,8 @@
              photo:'',
            },
            chats:{},
-           search:''
+           search:'',
+           loader: true,
 
       }
     },
@@ -82,6 +89,7 @@
       getUser(){
         this.$http.get(`${this.$baseApi}/chatUsers`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
                this.users=response.data.user 
+               this.loader = false
          }) 
       }, 
       postChat(){  

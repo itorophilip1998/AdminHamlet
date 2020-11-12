@@ -193,6 +193,10 @@ import pagination from 'laravel-vue-pagination'
           "comment":this.comment,
         }
         this.$http.post(`${this.$rootApi}/auth/userBan`,data).then((response)=> {
+          this.$message({
+              message: "User banned successfully!",
+              type: "success",
+            });
                         this.getuser();
                         console.log(response)
 
@@ -202,6 +206,10 @@ import pagination from 'laravel-vue-pagination'
       unbanUser(id)
       { 
         this.$http.get(`${this.$rootApi}/auth/userRevoke/${id}`).then((response)=> {
+          this.$message({
+              message: "User unbanned successfully!",
+              type: "success",
+            });
                        this.getuser();
                         console.log(response)
 
