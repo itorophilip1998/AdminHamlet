@@ -3,6 +3,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+// import Element from 'element-ui'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 import './registerServiceWorker'  
 import FlashMessage from '@smartweb/vue-flash-message'; 
 Vue.use(FlashMessage); 
@@ -15,6 +18,8 @@ Vue.prototype.$baseApi = 'https://hamlet.payfill.co/api/admin';
 Vue.prototype.$rootApi = 'https://hamlet.payfill.co/api';
 Vue.prototype.$rootDomain = 'https://hamlet.payfill.co';
 Vue.use(ArgonDashboard) 
+// Vue.use(Element)
+Vue.use(ElementUI)
 new Vue({ 
   router,
   store,

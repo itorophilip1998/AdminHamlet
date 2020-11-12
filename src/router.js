@@ -114,6 +114,15 @@ const router =new Router({
 
         },
         {
+          path: '/notifications',
+          name: 'notifications',
+          component: () => import(/* webpackChunkName: "demo" */ './views/notifications.vue'),
+          meta: { 
+            requiresAuth: true
+          }
+
+        },
+        {
           path: '/profile',
           name: 'profile',
           component: () => import(/* webpackChunkName: "demo" */ './views/UserProfile.vue'),
