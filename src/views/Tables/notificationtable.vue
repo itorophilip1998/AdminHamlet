@@ -101,10 +101,13 @@
         },
         postMessage(){  
         this.$http.post("https://hamlet.payfill.co/api/admin/notify/users",this.message,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {   
+               this.getNotifications()
                this.$message({
                 message: "You've posted a notification!",
                 type: "success"
         });console.log(response)
+        this.message.title = ""
+        this.message.body = ""
          }) 
       }, 
       getNotifications()
