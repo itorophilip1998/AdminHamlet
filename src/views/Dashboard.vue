@@ -11,7 +11,8 @@
             <div class="grid mb-5">
                 <router-link to="activeusers"><div class="one">
                     <div class="grid2">
-                        <div>
+
+                        <div> 
                             <h2>Active Users</h2>
                             <h4>{{(length2) ?  length2 : "0" }}</h4>
                         </div>
@@ -345,31 +346,40 @@ export default {
         activeUsers: {},
         bannedUsers: {},
         users:{},
+        data:{}
       };
     },
      mounted() {
-      this.initBigChart(0);
+        this.allData()  
+        window.Echo.channel(`notify`)
+        .listen('Notifications',(e)=>{
+        this.allData() 
+        console.log(e)
+        }) 
+
+    },
+    methods: {
+        allData()
+        {
+             this.initBigChart(0);
       this.getActive();
       this.getBan();
       this.getuser();
       this.getCompanies();
       this.getMessages();
-      this.getChats()
-    },
-    methods: {
+      this.getChats() 
+        },
         getMessages() {
       axios.get("https://hamlet.payfill.co/api/admin/contact", {headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}})
         .then((response) => {
           this.messages=response.data.contact.data
-          this.length1=response.data.contact.total
-          console.log(this.messages);
+          this.length1=response.data.contact.total 
           });
     },
     getChats() {
       axios.get("https://hamlet.payfill.co/api/chat/view/5", {headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}})
         .then((response) => {
-          this.chats=response.data
-          console.log(this.chats);
+          this.chats=response.data 
           
           });
     },
@@ -377,8 +387,7 @@ export default {
         {
          this.$http.get(`${this.$baseApi}/company`,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
                this.company=response.data.company.data 
-               this.length=response.data.company.total
-               console.log(this.company)
+               this.length=response.data.company.total 
          }) 
         },
       initBigChart(index) {
@@ -396,8 +405,7 @@ export default {
       },
       getActive() {
       axios.get("https://hamlet.payfill.co/api/admin/active/users", {headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}})
-        .then((res) => {
-          console.log(res.data.active_users);
+        .then((res) => { 
           this.activeUsers = res.data.active_users.data;
           this.length2 = res.data.active_users.total;
           this.loader=false;
@@ -405,8 +413,7 @@ export default {
     },
     getBan() {
       axios.get("https://hamlet.payfill.co/api/admin/ban/users", {headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}})
-        .then((res) => {
-          console.log(res.data.banned_users);
+        .then((res) => { 
           this.bannedUsers = res.data.banned_users.data;
           this.length3 = res.data.banned_users.total
         });
@@ -415,8 +422,7 @@ export default {
         {
          this.$http.get("https://hamlet.payfill.co/api/admin/allUsers",{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {
                this.users=response.data.user.data;
-               this.length4 = response.data.user.total
-               console.log(this.users)
+               this.length4 = response.data.user.total 
          }) 
         }
     },

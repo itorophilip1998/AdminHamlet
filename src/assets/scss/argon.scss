@@ -70,11 +70,12 @@
 @import "custom/vendors";
 
 
-// Custorm css
 ::-webkit-scrollbar
 {
-    display: none;
+    width: 8px !important;  
+     display: none;
 }
+  
 .bg-image
 {
     background-image: url(../images/bg3.jpg);

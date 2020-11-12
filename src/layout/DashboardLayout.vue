@@ -20,7 +20,7 @@
         <sidebar-item :link="{name: 'Companies', icon: 'ni ni-briefcase-24 text-blue', path: '/companies'}"/>
         <sidebar-item :link="{name: 'Chats', icon: 'fas fa-comments   text-blue', path: '/chats'}"/> 
         <sidebar-item :link="{name: 'Contact us', icon: ' ni ni-notification-70 text-blue', path: '/contactus'}"/>
-        <sidebar-item :link="{name: 'Send Notifications', icon: ' ni fa-bell text-blue', path: '/notifications'}"/>        
+        <sidebar-item :link="{name: 'Send Notifications', icon: 'fa fa-bell text-blue', path: '/notifications'}"/>        
       </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">

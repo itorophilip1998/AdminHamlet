@@ -37,7 +37,7 @@ const router =new Router({
         {
           path: '/chats',
           name: 'chats',
-          component: () => import(/* webpackChunkName: "demo" */ './views/chat.vue'),
+          component: () => import(/* webpackChunkName: "demo" */ './views/chats.vue'),
           meta: { 
             requiresAuth: true
           }

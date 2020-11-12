@@ -22,6 +22,6 @@ Vue.use(ArgonDashboard)
 Vue.use(ElementUI)
 new Vue({ 
   router,
-  store,
+  store, 
   render: h => h(App)
 }).$mount('#app')
