@@ -23,7 +23,7 @@
 </form>
       </div>
     </div>
-    <div class="table-responsive" v-if="viewNotifications">  
+    <div class="table-responsive table-bordered pb-9" v-if="viewNotifications">  
 
 <table class="table">
   <thead class="thead-dark">
@@ -39,7 +39,7 @@
     :key="index">
       <th scope="row">{{index + 1}}</th>
       <td>{{notification.title}}</td>
-      <td>{{notification.body}}</td>
+      <td><truncate clamp="....."  action-class="text-primary font-weight-bold" :length="20" less="....." :text="notification.body"></truncate></td>
       <td><base-dropdown class="dropdown"
                            position="right">
               <a slot="title" class="btn btn-sm btn-icon-only text-light" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -47,7 +47,7 @@
               </a>
 
               <template> 
-                <a class="dropdown-item text-danger" @click="deleteMessage()">Delete<i class="fas float-right fa-trash-alt"></i></a>  
+                <a class="dropdown-item text-danger" @click="deleteMessage(notification.id)">Delete<i class="fas float-right fa-trash-alt"></i></a>  
             
               </template>
             </base-dropdown></td>
@@ -66,8 +66,10 @@
   
 </template>
 <script>
+  import truncate from 'vue-truncate-collapsed';
   export default {
     components:{
+        truncate
     },
     name: 'projects-table',
     props: {
@@ -112,8 +114,9 @@
                console.log(this.notifications) 
          }) 
         },
-        deleteMessage(){  
-        this.$http.del("https://hamlet.payfill.co/api/admin/deleteNotice/5",{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {   
+        deleteMessage(id){  
+        this.$http.delete("https://hamlet.payfill.co/api/admin/deleteNotice/"+ id,{headers:{'Authorization':`Bearer ${localStorage.getItem(this.$token)}`}}).then((response)=> {   
+               this.getNotifications()
                this.$message({
                 message: "You've deleted a notification!",
                 type: "success"
